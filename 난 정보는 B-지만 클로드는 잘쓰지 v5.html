@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>유기화학 명명법 · 245문제</title>
+<meta name="description" content="탄화수소 149문제와 작용기 96문제, 실존 화합물 위주로 확장된 245문제. 골격식을 읽고 영어 명명법을 연습하세요.">
+<style>
+:root{
+  --bg:#f4f5fa; --panel-bg:#ffffff; --panel-bg2:#f8f9fd; --ink:#1b1d26; --muted:#6a6f7d;
+  --accent:#4f6df5; --accent-ink:#ffffff; --border:#e3e5ee;
+  --good:#1f9d55; --good-bg:#e9f9ef; --bad:#e0393f; --bad-bg:#fdeceb; --chip-bg:#eef0fb;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  box-sizing: border-box;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#14151c; --panel-bg:#1d1f29; --panel-bg2:#232532; --ink:#edeef4; --muted:#9aa0b2;
+    --accent:#7c93ff; --accent-ink:#12131a; --border:#30323f;
+    --good:#3ddc84; --good-bg:#12271c; --bad:#ff6b6b; --bad-bg:#2a1518; --chip-bg:#252838;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#14151c; --panel-bg:#1d1f29; --panel-bg2:#232532; --ink:#edeef4; --muted:#9aa0b2;
+  --accent:#7c93ff; --accent-ink:#12131a; --border:#30323f;
+  --good:#3ddc84; --good-bg:#12271c; --bad:#ff6b6b; --bad-bg:#2a1518; --chip-bg:#252838;
+}
+html{ scroll-padding-top: env(safe-area-inset-top, 0px); }
+*{ box-sizing: border-box; }
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  line-height:1.5;
+}
+.wrap{ max-width: 760px; margin: 0 auto; padding: 28px 18px 60px; }
+header.top{ margin-bottom: 18px; }
+header.top h1{ font-size: 1.5rem; margin: 0 0 4px; letter-spacing:-0.01em; }
+header.top p{ margin:0; color:var(--muted); font-size:0.92rem; }
+
+.panel{
+  background:var(--panel-bg); border:1px solid var(--border); border-radius:16px;
+  padding:18px 20px; margin-bottom:16px;
+}
+details.legend summary{ cursor:pointer; font-weight:600; font-size:0.92rem; color:var(--accent); }
+details.legend[open] summary{ margin-bottom:10px; }
+details.legend .legend-body{ font-size:0.86rem; color:var(--muted); }
+details.legend ul{ margin:6px 0 0; padding-left:18px; }
+details.legend li{ margin-bottom:3px; }
+
+.filters h2{ font-size:0.95rem; margin:0 0 10px; }
+.cat-grid{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px; }
+.cat-chip{ position:relative; }
+.cat-chip input{ position:absolute; opacity:0; inset:0; cursor:pointer; margin:0; width:100%; height:100%; }
+.cat-chip label{
+  display:inline-flex; align-items:center; gap:6px; padding:7px 12px; border-radius:999px;
+  background:var(--chip-bg); color:var(--muted); font-size:0.82rem; border:1px solid transparent; user-select:none;
+}
+.cat-chip input:checked + label{ background:var(--accent); color:var(--accent-ink); font-weight:600; }
+.row-controls{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:space-between; }
+.mini-btn{
+  background:none; border:1px solid var(--border); color:var(--muted); padding:6px 12px; border-radius:8px;
+  font-size:0.8rem; cursor:pointer;
+}
+.mini-btn:hover{ border-color:var(--accent); color:var(--accent); }
+.hint-toggle{ display:flex; align-items:center; gap:6px; font-size:0.82rem; color:var(--muted); }
+
+.start-btn{
+  width:100%; background:var(--accent); color:var(--accent-ink); border:none; border-radius:12px;
+  padding:13px; font-size:1rem; font-weight:700; cursor:pointer; margin-top:4px;
+}
+.start-btn:hover{ filter:brightness(1.06); }
+
+#quizArea{ display:none; }
+.progress-row{ display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; font-size:0.85rem; color:var(--muted); }
+.progress-row .score{ font-weight:700; color:var(--ink); }
+.cat-badge{
+  display:inline-block; background:var(--chip-bg); color:var(--accent); font-size:0.78rem; font-weight:700;
+  padding:4px 10px; border-radius:999px; margin-bottom:12px;
+}
+.structure-box{
+  background:var(--panel-bg2); border:1px solid var(--border); border-radius:14px;
+  display:flex; align-items:center; justify-content:center; padding:10px; min-height:230px;
+}
+.structure-box svg{ width:100%; max-width:420px; height:auto; display:block; }
+.bond-line{ stroke:var(--ink); stroke-width:2.6; stroke-linecap:round; }
+.atom-label{
+  font-size:16px; font-weight:700; fill:var(--ink); text-anchor:middle; dominant-baseline:middle;
+  paint-order: stroke; stroke:var(--panel-bg2); stroke-width:8px; stroke-linejoin:round;
+  font-family: -apple-system, BlinkMacSystemFont, "Pretendard", sans-serif;
+}
+
+.answer-row{ display:flex; gap:8px; margin-top:16px; }
+.answer-row input{
+  flex:1; padding:12px 14px; border-radius:10px; border:1.5px solid var(--border); background:var(--panel-bg);
+  color:var(--ink); font-size:1rem; min-width:0;
+}
+.answer-row input:focus{ outline:none; border-color:var(--accent); }
+.btn{
+  padding:12px 16px; border-radius:10px; border:none; font-weight:700; cursor:pointer; font-size:0.95rem;
+  white-space:nowrap;
+}
+.btn.primary{ background:var(--accent); color:var(--accent-ink); }
+.btn.primary:hover{ filter:brightness(1.06); }
+.btn.ghost{ background:none; border:1.5px solid var(--border); color:var(--muted); }
+.btn.ghost:hover{ border-color:var(--accent); color:var(--accent); }
+.btn:disabled{ opacity:0.45; cursor:default; }
+
+.action-row{ display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
+
+.feedback{
+  margin-top:14px; padding:13px 15px; border-radius:12px; font-size:0.92rem; display:none;
+}
+.feedback.show{ display:block; }
+.feedback.correct{ background:var(--good-bg); color:var(--good); }
+.feedback.wrong{ background:var(--bad-bg); color:var(--bad); }
+.feedback .answers{ margin-top:6px; font-weight:700; color:var(--ink); }
+
+.done-panel{ display:none; text-align:center; }
+.done-panel.show{ display:block; }
+.done-panel .big-score{ font-size:2.2rem; font-weight:800; margin:10px 0 4px; color:var(--accent); }
+.done-panel p{ color:var(--muted); margin:0 0 16px; }
+
+footer{ text-align:center; color:var(--muted); font-size:0.78rem; margin-top:24px; }
+
+.total-chip{display:inline-block;font-size:14px;padding:3px 9px;border-radius:8px;background:var(--accent);color:var(--accent-ink);vertical-align:middle}
+.bank-summary,.selection-text,.question-note{font-size:14px;color:var(--muted);margin:0 0 12px}
+.selection-text{margin-top:14px;margin-bottom:6px}
+.cat-chip label,.mini-btn,.hint-toggle,.cat-badge{font-size:14px}
+.cat-chip input:focus-visible+label{outline:3px solid var(--accent);outline-offset:3px}
+.explanation{margin-top:10px;padding-top:10px;border-top:1px solid var(--border);font-weight:400;font-size:16px;line-height:1.7;color:var(--ink)}
+.start-btn:disabled{opacity:.5;cursor:not-allowed}
+.structure-box svg{max-width:560px;max-height:340px;min-height:210px}
+.answers{overflow-wrap:anywhere}
+footer,details.legend .legend-body{font-size:14px}
+@media(max-width:480px){.wrap{padding:20px 12px 40px}.panel{padding:16px 14px}.cat-grid{gap:7px}.cat-chip label{padding:7px 10px}.question-note{line-height:1.6}.progress-row{gap:12px}.action-row{flex-wrap:wrap}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <h1>⚗️ 유기화학 명명법 연습 <span class="total-chip">245문제</span></h1>
+    <p>골격식(선형식)을 보고 <b>영어 IUPAC 이름</b>(또는 통용명)을 맞혀보세요.</p>
+  </header>
+
+  <div class="panel legend">
+    <details class="legend">
+      <summary>골격식 읽는 법 (누르면 펼쳐짐)</summary>
+      <div class="legend-body">
+        <ul>
+          <li>선의 꺾인 지점과 끝점은 모두 <b>탄소</b>이며, 탄소에 붙은 수소는 표시하지 않습니다.</li>
+          <li>산소(O), 질소(N) 등 다른 원자는 문자로 직접 표시됩니다. (예: OH, NH₂)</li>
+          <li>두 줄은 이중 결합, 세 줄은 삼중 결합입니다.</li>
+          <li>육각형에 이중 결합이 번갈아 있으면 벤젠고리(방향족)입니다.</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+
+  <div class="panel filters">
+    <h2>연습할 범위 선택</h2><p class="bank-summary">탄화수소 149문제 · 작용기 96문제 (실제 존재하는 화합물 다수 포함)</p>
+    <div class="cat-grid" id="catGrid"></div>
+    <div class="row-controls">
+      <div class="hint-toggle">
+        <input type="checkbox" id="hintToggle">
+        <label for="hintToggle">화합물 종류(범주) 힌트 보기</label>
+      </div>
+      <div class="quick-select"><button class="mini-btn" id="hydroBtn">탄화수소만</button> <button class="mini-btn" id="allBtn">전체 해제</button></div>
+    </div>
+    <p id="selectionText" class="selection-text" aria-live="polite"></p><button class="start-btn" id="startBtn">150문제 시작하기</button>
+  </div>
+
+  <div class="panel" id="quizArea">
+    <div class="progress-row">
+      <span id="progressText">1 / 20</span>
+      <span class="score">첫 시도 정답: <span id="scoreText">0</span></span>
+    </div>
+    <div id="catBadge" class="cat-badge" style="display:none;"></div>
+    <p class="question-note">골격식의 영어 이름을 쓰세요. E/Z, R/S, cis/trans는 쓰지 않습니다.</p><div class="structure-box" id="structureBox" role="img" aria-label="명명할 분자의 골격식"></div>
+
+    <div class="answer-row">
+      <input type="text" id="answerInput" aria-label="분자의 영어 이름" placeholder="이 물질의 영어 이름(IUPAC)을 입력하세요 (예: ethanol)" autocomplete="off" autocapitalize="off" spellcheck="false">
+      <button class="btn primary" id="checkBtn">확인</button>
+    </div>
+    <div class="action-row">
+      <button class="btn ghost" id="revealBtn">정답 보기</button>
+      <button class="btn ghost" id="nextBtn">다음 문제 →</button>
+    </div>
+
+    <div class="feedback" id="feedback" aria-live="polite"></div>
+  </div>
+
+  <div class="panel done-panel" id="donePanel">
+    <div>🎉 문제를 모두 풀었습니다!</div>
+    <div class="big-score"><span id="finalScore">0</span> / <span id="finalTotal">0</span></div>
+    <p>첫 시도에 맞힌 문제만 점수에 포함됩니다. 정답 보기와 건너뛰기는 0점입니다.</p>
+    <button class="start-btn" id="restartBtn">다시 시작하기</button>
+  </div>
+
+  <footer>범위: 알케인·알켄·알카인·사이클로알케인/알켄/알카인·방향족·알코올·에터·알데하이드·케톤·에스터·카복실산·아민·페놀</footer>
+</div>
+
+<script>
+/* ===================== 기하 헬퍼 ===================== */
+const BOND = 38;
+function addNode(m,x,y){ m.n.push({x,y}); return m.n.length-1; }
+function addFrom(m,i,angDeg,len=BOND){
+  const b=m.n[i]; const r=angDeg*Math.PI/180;
+  return addNode(m, b.x+len*Math.cos(r), b.y-len*Math.sin(r));
+}
+function bond(m,i,j,order=1){ m.e.push([i,j,order]); }
+function label(m,i,text){ m.lab[i]=text; }
+
+function chain(m,x0,y0,n,startAngle=30){
+  let cur=addNode(m,x0,y0);
+  const idxs=[cur]; let ang=startAngle;
+  for(let k=1;k<n;k++){
+    const nx=addFrom(m,cur,ang); bond(m,cur,nx,1);
+    idxs.push(nx); cur=nx; ang=-ang;
+  }
+  return idxs;
+}
+function ring(m,cx,cy,r,n,startDeg=-90){
+  const idxs=[];
+  for(let i=0;i<n;i++){
+    const a=(startDeg+i*360/n)*Math.PI/180;
+    idxs.push(addNode(m, cx+r*Math.cos(a), cy+r*Math.sin(a)));
+  }
+  for(let i=0;i<n;i++) bond(m, idxs[i], idxs[(i+1)%n], 1);
+  return idxs;
+}
+function ringBranch(m, idxs, i, n, startDeg=-90, len=BOND){
+  const ang = -(startDeg + i*360/n);
+  const b = addFrom(m, idxs[i], ang, len);
+  bond(m, idxs[i], b, 1);
+  return {idx:b, ang};
+}
+function newMol(){ return {n:[], e:[], lab:{}}; }
+
+/* ===================== SVG 렌더러 ===================== */
+function centroid(nodes){
+  let sx=0,sy=0; nodes.forEach(p=>{sx+=p.x; sy+=p.y});
+  return {x:sx/nodes.length, y:sy/nodes.length};
+}
+function dist(a,b){ return Math.hypot(a.x-b.x, a.y-b.y); }
+
+function buildSVG(m){
+  const nodes=m.n, edges=m.e, lab=m.lab;
+  const c = centroid(nodes);
+  let lines = [];
+  let texts = [];
+
+  edges.forEach(([i,j,order])=>{
+    const p1=nodes[i], p2=nodes[j];
+    const dx=p2.x-p1.x, dy=p2.y-p1.y;
+    const len=Math.hypot(dx,dy);
+    const ux=dx/len, uy=dy/len;
+    const hasLab1 = lab[i]!==undefined, hasLab2 = lab[j]!==undefined;
+    let a1={x:p1.x,y:p1.y}, a2={x:p2.x,y:p2.y};
+    if(hasLab1){ a1={x:p1.x+ux*13, y:p1.y+uy*13}; }
+    if(hasLab2){ a2={x:p2.x-ux*13, y:p2.y-uy*13}; }
+
+    lines.push(`<line class="bond-line" x1="${a1.x.toFixed(1)}" y1="${a1.y.toFixed(1)}" x2="${a2.x.toFixed(1)}" y2="${a2.y.toFixed(1)}"/>`);
+
+    if(order>1){
+      const perp={x:-uy, y:ux};
+      const mid={x:(p1.x+p2.x)/2,y:(p1.y+p2.y)/2};
+      const candA={x:mid.x+perp.x*8,y:mid.y+perp.y*8};
+      const candB={x:mid.x-perp.x*8,y:mid.y-perp.y*8};
+      const inward = dist(candA,c) < dist(candB,c) ? perp : {x:-perp.x,y:-perp.y};
+      const inA={x:a1.x+ux*len*0.16, y:a1.y+uy*len*0.16};
+      const inB={x:a2.x-ux*len*0.16, y:a2.y-uy*len*0.16};
+
+      if(order===2){
+        lines.push(`<line class="bond-line" x1="${(inA.x+inward.x*6).toFixed(1)}" y1="${(inA.y+inward.y*6).toFixed(1)}" x2="${(inB.x+inward.x*6).toFixed(1)}" y2="${(inB.y+inward.y*6).toFixed(1)}"/>`);
+      } else if(order===3){
+        [inward, {x:-inward.x,y:-inward.y}].forEach(side=>{
+          lines.push(`<line class="bond-line" x1="${(inA.x+side.x*6).toFixed(1)}" y1="${(inA.y+side.y*6).toFixed(1)}" x2="${(inB.x+side.x*6).toFixed(1)}" y2="${(inB.y+side.y*6).toFixed(1)}"/>`);
+        });
+      }
+    }
+  });
+
+  Object.keys(lab).forEach(k=>{
+    const p=nodes[k];
+    texts.push(`<text class="atom-label" x="${p.x.toFixed(1)}" y="${(p.y+1).toFixed(1)}">${lab[k]}</text>`);
+  });
+
+  const xs=nodes.map(p=>p.x), ys=nodes.map(p=>p.y);
+  const pad=52;
+  const minX=Math.min(...xs)-pad, minY=Math.min(...ys)-pad;
+  const w=Math.max(...xs)-Math.min(...xs)+pad*2;
+  const h=Math.max(...ys)-Math.min(...ys)+pad*2;
+
+  return `<svg viewBox="${minX.toFixed(1)} ${minY.toFixed(1)} ${w.toFixed(1)} ${h.toFixed(1)}" xmlns="http://www.w3.org/2000/svg">${lines.join('')}${texts.join('')}</svg>`;
+}
+
+/* ===================== 분자 데이터 ===================== */
+const MOLS = [];
+function addMol(id, cat, ans, build){ MOLS.push({id, cat, ans, build}); }
+
+/* ---- 알케인 ---- */
+addMol('propane','alkane',['propane'], m=>{ chain(m,40,140,3,30); });
+addMol('2-methylbutane','alkane',['2-methylbutane', 'isopentane'], m=>{
+  const c=chain(m,40,140,4,30);
+  const b=addFrom(m,c[1],90); bond(m,c[1],b,1);
+});
+addMol('2,2-dimethylpropane','alkane',['2,2-dimethylpropane', 'neopentane'], m=>{
+  const c=chain(m,40,140,3,30);
+  const b1=addFrom(m,c[1],90); bond(m,c[1],b1,1);
+  const b2=addFrom(m,c[1],150); bond(m,c[1],b2,1);
+});
+addMol('3-ethylpentane','alkane',['3-ethylpentane'], m=>{
+  const c=chain(m,40,140,5,30);
+  const b1=addFrom(m,c[2],-90); bond(m,c[2],b1,1);
+  const b2=addFrom(m,b1,-150); bond(m,b1,b2,1);
+});
+addMol('hexane','alkane',['hexane'], m=>{ chain(m,30,140,6,30); });
+
+/* ---- 알켄 ---- */
+addMol('propene','alkene',['propene', 'propylene'], m=>{
+  const c=chain(m,40,140,3,30); m.e[0][2]=2;
+});
+addMol('2-butene','alkene',['2-butene'], m=>{
+  const c=chain(m,40,140,4,30); m.e[1][2]=2;
+});
+addMol('2-methyl-2-butene','alkene',['2-methyl-2-butene'], m=>{
+  const c=chain(m,40,140,4,30); m.e[1][2]=2;
+  const b=addFrom(m,c[1],90); bond(m,c[1],b,1);
+});
+addMol('1-pentene','alkene',['1-pentene'], m=>{
+  const c=chain(m,30,140,5,30); m.e[0][2]=2;
+});
+
+/* ---- 알카인 ---- */
+addMol('propyne','alkyne',['propyne'], m=>{
+  const i0=addNode(m,50,140); const i1=addFrom(m,i0,0); bond(m,i0,i1,3);
+  const i2=addFrom(m,i1,30); bond(m,i1,i2,1);
+});
+addMol('1-butyne','alkyne',['1-butyne'], m=>{
+  const i0=addNode(m,40,140); const i1=addFrom(m,i0,0); bond(m,i0,i1,3);
+  const i2=addFrom(m,i1,30); bond(m,i1,i2,1);
+  const i3=addFrom(m,i2,-30); bond(m,i2,i3,1);
+});
+addMol('2-butyne','alkyne',['2-butyne'], m=>{
+  const i0=addNode(m,40,140); const i1=addFrom(m,i0,0); bond(m,i0,i1,1);
+  const i2=addFrom(m,i1,0); bond(m,i1,i2,3);
+  const i3=addFrom(m,i2,0); bond(m,i2,i3,1);
+});
+
+/* ---- 사이클로알케인 ---- */
+addMol('cyclopropane','cycloalkane',['cyclopropane'], m=>{ ring(m,120,140,34,3); });
+addMol('cyclopentane','cycloalkane',['cyclopentane'], m=>{ ring(m,120,140,46,5); });
+addMol('methylcyclohexane','cycloalkane',['methylcyclohexane'], m=>{
+  const idxs=ring(m,120,150,52,6);
+  ringBranch(m,idxs,0,6);
+});
+addMol('1,2-dimethylcyclobutane','cycloalkane',['1,2-dimethylcyclobutane'], m=>{
+  const idxs=ring(m,120,140,38,4);
+  ringBranch(m,idxs,0,4);
+  ringBranch(m,idxs,1,4);
+});
+
+/* ---- 사이클로알켄 ---- */
+addMol('cyclopentene','cycloalkene',['cyclopentene'], m=>{
+  const idxs=ring(m,120,140,46,5); m.e[0][2]=2;
+});
+addMol('cyclohexene','cycloalkene',['cyclohexene'], m=>{
+  const idxs=ring(m,120,150,52,6); m.e[0][2]=2;
+});
+addMol('1-methylcyclohexene','cycloalkene',['1-methylcyclohexene'], m=>{
+  const idxs=ring(m,120,150,52,6); m.e[0][2]=2;
+  ringBranch(m,idxs,0,6);
+});
+
+/* ---- 사이클로알카인 ---- */
+addMol('cyclooctyne','cycloalkyne',['cyclooctyne'], m=>{
+  const idxs=ring(m,120,140,60,8); m.e[0][2]=3;
+});
+
+/* ---- 방향족 ---- */
+addMol('benzene','aromatic',['benzene'], m=>{
+  const idxs=ring(m,120,150,52,6);
+  for(let i=0;i<6;i+=2) m.e[i][2]=2;
+});
+addMol('toluene','aromatic',['toluene', 'methylbenzene'], m=>{
+  const idxs=ring(m,120,150,52,6);
+  for(let i=0;i<6;i+=2) m.e[i][2]=2;
+  ringBranch(m,idxs,0,6);
+});
+addMol('ethylbenzene','aromatic',['ethylbenzene'], m=>{
+  const idxs=ring(m,120,150,52,6);
+  for(let i=0;i<6;i+=2) m.e[i][2]=2;
+  const r1=ringBranch(m,idxs,0,6);
+  const b2=addFrom(m,r1.idx, r1.ang-60); bond(m,r1.idx,b2,1);
+});
+addMol('1,4-dimethylbenzene','aromatic',['1,4-dimethylbenzene', 'p-xylene', 'para-xylene'], m=>{
+  const idxs=ring(m,120,150,52,6);
+  for(let i=0;i<6;i+=2) m.e[i][2]=2;
+  ringBranch(m,idxs,0,6);
+  ringBranch(m,idxs,3,6);
+});
+
+/* ---- 알코올 ---- */
+addMol('ethanol','alcohol',['ethanol', 'ethyl alcohol'], m=>{
+  const c=chain(m,50,140,2,30);
+  const o=addFrom(m,c[1],-30); bond(m,c[1],o,1); label(m,o,'OH');
+});
+addMol('2-propanol','alcohol',['2-propanol', 'isopropyl alcohol', 'isopropanol'], m=>{
+  const c=chain(m,40,140,3,30);
+  const o=addFrom(m,c[1],90); bond(m,c[1],o,1); label(m,o,'OH');
+});
+addMol('2-methyl-2-propanol','alcohol',['2-methyl-2-propanol', 'tert-butanol', 'tert-butyl alcohol'], m=>{
+  const c=chain(m,40,140,3,30);
+  const o=addFrom(m,c[1],90); bond(m,c[1],o,1); label(m,o,'OH');
+  const b=addFrom(m,c[1],150); bond(m,c[1],b,1);
+});
+addMol('cyclohexanol','alcohol',['cyclohexanol'], m=>{
+  const idxs=ring(m,120,150,52,6);
+  const o=ringBranch(m,idxs,0,6); label(m,o.idx,'OH');
+});
+
+/* ---- 에터 ---- */
+addMol('dimethyl-ether','ether',['dimethyl ether', 'methoxymethane'], m=>{
+  const c0=addNode(m,50,140);
+  const o=addFrom(m,c0,30); bond(m,c0,o,1); label(m,o,'O');
+  const c2=addFrom(m,o,-30); bond(m,o,c2,1);
+});
+addMol('diethyl-ether','ether',['diethyl ether', 'ethoxyethane'], m=>{
+  const c0=addNode(m,40,140);
+  const c1=addFrom(m,c0,30); bond(m,c0,c1,1);
+  const o=addFrom(m,c1,-30); bond(m,c1,o,1); label(m,o,'O');
+  const c2=addFrom(m,o,30); bond(m,o,c2,1);
+  const c3=addFrom(m,c2,-30); bond(m,c2,c3,1);
+});
+addMol('ethyl-methyl-ether','ether',['ethyl methyl ether', 'methyl ethyl ether', 'methoxyethane'], m=>{
+  const c0=addNode(m,40,140);
+  const c1=addFrom(m,c0,30); bond(m,c0,c1,1);
+  const o=addFrom(m,c1,-30); bond(m,c1,o,1); label(m,o,'O');
+  const c2=addFrom(m,o,30); bond(m,o,c2,1);
+});
+
+/* ---- 알데하이드 ---- */
+addMol('ethanal','aldehyde',['ethanal', 'acetaldehyde'], m=>{
+  const c=chain(m,50,140,2,30);
+  const o=addFrom(m,c[1],-90); bond(m,c[1],o,2); label(m,o,'O');
+});
+addMol('propanal','aldehyde',['propanal'], m=>{
+  const c=chain(m,40,140,3,30);
+  const o=addFrom(m,c[0],150); bond(m,c[0],o,2); label(m,o,'O');
+});
+addMol('2-methylpropanal','aldehyde',['2-methylpropanal', 'isobutyraldehyde'], m=>{
+  const c=chain(m,40,140,3,30);
+  const o=addFrom(m,c[0],150); bond(m,c[0],o,2); label(m,o,'O');
+  const b=addFrom(m,c[1],90); bond(m,c[1],b,1);
+});
+
+/* ---- 케톤 ---- */
+addMol('propanone','ketone',['propanone', 'acetone', 'dimethyl ketone'], m=>{
+  const c=chain(m,40,140,3,30);
+  const o=addFrom(m,c[1],90); bond(m,c[1],o,2); label(m,o,'O');
+});
+addMol('2-butanone','ketone',['2-butanone', 'methyl ethyl ketone', 'mek'], m=>{
+  const c=chain(m,30,140,4,30);
+  const o=addFrom(m,c[1],90); bond(m,c[1],o,2); label(m,o,'O');
+});
+addMol('4-methyl-2-pentanone','ketone',['4-methyl-2-pentanone', 'mibk', 'methyl isobutyl ketone'], m=>{
+  const c=chain(m,20,140,5,30);
+  const o=addFrom(m,c[1],90); bond(m,c[1],o,2); label(m,o,'O');
+  const b=addFrom(m,c[3],90); bond(m,c[3],b,1);
+});
+addMol('cyclohexanone','ketone',['cyclohexanone'], m=>{
+  const idxs=ring(m,120,150,52,6);
+  const o=ringBranch(m,idxs,0,6); m.e[m.e.length-1][2]=2; label(m,o.idx,'O');
+});
+
+/* ---- 에스터 ---- */
+addMol('methyl-acetate','ester',['methyl acetate'], m=>{
+  const c0=addNode(m,40,140);
+  const c1=addFrom(m,c0,30); bond(m,c0,c1,1);
+  const oUp=addFrom(m,c1,90); bond(m,c1,oUp,2); label(m,oUp,'O');
+  const oEst=addFrom(m,c1,-30); bond(m,c1,oEst,1); label(m,oEst,'O');
+  const c2=addFrom(m,oEst,30); bond(m,oEst,c2,1);
+});
+addMol('ethyl-acetate','ester',['ethyl acetate'], m=>{
+  const c0=addNode(m,30,140);
+  const c1=addFrom(m,c0,30); bond(m,c0,c1,1);
+  const oUp=addFrom(m,c1,90); bond(m,c1,oUp,2); label(m,oUp,'O');
+  const oEst=addFrom(m,c1,-30); bond(m,c1,oEst,1); label(m,oEst,'O');
+  const c2=addFrom(m,oEst,30); bond(m,oEst,c2,1);
+  const c3=addFrom(m,c2,-30); bond(m,c2,c3,1);
+});
+addMol('ethyl-formate','ester',['ethyl formate'], m=>{
+  const c1=addNode(m,40,140);
+  const oUp=addFrom(m,c1,90); bond(m,c1,oUp,2); label(m,oUp,'O');
+  const oEst=addFrom(m,c1,-30); bond(m,c1,oEst,1); label(m,oEst,'O');
+  const c2=addFrom(m,oEst,30); bond(m,oEst,c2,1);
+  const c3=addFrom(m,c2,-30); bond(m,c2,c3,1);
+});
+
+/* ---- 카복실산 ---- */
+addMol('acetic-acid','acid',['acetic acid', 'ethanoic acid'], m=>{
+  const c0=addNode(m,50,140);
+  const c1=addFrom(m,c0,30); bond(m,c0,c1,1);
+  const oUp=addFrom(m,c1,90); bond(m,c1,oUp,2); label(m,oUp,'O');
+  const oh=addFrom(m,c1,-30); bond(m,c1,oh,1); label(m,oh,'OH');
+});
+addMol('propanoic-acid','acid',['propanoic acid', 'propionic acid'], m=>{
+  const c0=addNode(m,40,140);
+  const c1=addFrom(m,c0,30); bond(m,c0,c1,1);
+  const c2=addFrom(m,c1,-30); bond(m,c1,c2,1);
+  const oUp=addFrom(m,c2,30); bond(m,c2,oUp,2); label(m,oUp,'O');
+  const oh=addFrom(m,c2,-90); bond(m,c2,oh,1); label(m,oh,'OH');
+});
+addMol('2-methylpropanoic-acid','acid',['2-methylpropanoic acid', 'isobutyric acid'], m=>{
+  const c1=addNode(m,40,140);
+  const oUp=addFrom(m,c1,90); bond(m,c1,oUp,2); label(m,oUp,'O');
+  const oh=addFrom(m,c1,150); bond(m,c1,oh,1); label(m,oh,'OH');
+  const c2=addFrom(m,c1,-30); bond(m,c1,c2,1);
+  const c3=addFrom(m,c2,30); bond(m,c2,c3,1);
+  const b=addFrom(m,c2,-90); bond(m,c2,b,1);
+});
+addMol('benzoic-acid','acid',['benzoic acid'], m=>{
+  const idxs=ring(m,120,160,52,6);
+  for(let i=0;i<6;i+=2) m.e[i][2]=2;
+  const r1=ringBranch(m,idxs,0,6);
+  const oUp=addFrom(m,r1.idx,30); bond(m,r1.idx,oUp,2); label(m,oUp,'O');
+  const oh=addFrom(m,r1.idx,150); bond(m,r1.idx,oh,1); label(m,oh,'OH');
+});
+
+/* ---- 아민 ---- */
+addMol('methanamine','amine',['methanamine', 'methylamine'], m=>{
+  const c0=addNode(m,60,140);
+  const n1=addFrom(m,c0,30); bond(m,c0,n1,1); label(m,n1,'NH₂');
+});
+addMol('dimethylamine','amine',['dimethylamine', 'n-methylmethanamine'], m=>{
+  const n0=addNode(m,90,140); label(m,n0,'NH');
+  const c1=addFrom(m,n0,30); bond(m,n0,c1,1);
+  const c2=addFrom(m,n0,-90); bond(m,n0,c2,1);
+});
+addMol('trimethylamine','amine',['trimethylamine'], m=>{
+  const n0=addNode(m,100,140); label(m,n0,'N');
+  const c1=addFrom(m,n0,30); bond(m,n0,c1,1);
+  const c2=addFrom(m,n0,150); bond(m,n0,c2,1);
+  const c3=addFrom(m,n0,-90); bond(m,n0,c3,1);
+});
+addMol('aniline','amine',['aniline', 'phenylamine', 'benzenamine', 'aminobenzene'], m=>{
+  const idxs=ring(m,120,150,52,6);
+  for(let i=0;i<6;i+=2) m.e[i][2]=2;
+  const r1=ringBranch(m,idxs,0,6); label(m,r1.idx,'NH₂');
+});
+
+/* ---- 페놀 ---- */
+addMol('phenol','phenol',['phenol', 'hydroxybenzene'], m=>{
+  const idxs=ring(m,120,150,52,6);
+  for(let i=0;i<6;i+=2) m.e[i][2]=2;
+  const r1=ringBranch(m,idxs,0,6); label(m,r1.idx,'OH');
+});
+addMol('4-methylphenol','phenol',['4-methylphenol', 'p-cresol', 'para-cresol'], m=>{
+  const idxs=ring(m,120,150,52,6);
+  for(let i=0;i<6;i+=2) m.e[i][2]=2;
+  const r1=ringBranch(m,idxs,0,6); label(m,r1.idx,'OH');
+  ringBranch(m,idxs,3,6);
+});
+addMol('2,4-dimethylphenol','phenol',['2,4-dimethylphenol'], m=>{
+  const idxs=ring(m,120,150,52,6);
+  for(let i=0;i<6;i+=2) m.e[i][2]=2;
+  const r1=ringBranch(m,idxs,0,6); label(m,r1.idx,'OH');
+  ringBranch(m,idxs,1,6);
+  ringBranch(m,idxs,3,6);
+});
+
+
+/* Expanded structural builders. Positions in specifications are one-based. */
+function buildSpec(m,s){
+  const orders=new Map(s.bonds||[]);
+  let c=[];
+  if(s.shape==='ring'){
+    c=ring(m,180,170,Math.max(44,s.n*8),s.n);
+    for(const [p,o] of orders) m.e[p-1][2]=o;
+  }else{
+    c=[addNode(m,40,160)]; let angle=30;
+    for(let p=1;p<s.n;p++){
+      if(p>1 && orders.get(p-1)!==3 && orders.get(p)!==3) angle=-angle;
+      const k=addFrom(m,c[c.length-1],angle); bond(m,c[c.length-1],k,orders.get(p)||1);c.push(k);
+    }
+  }
+  const groups=new Map();
+  for(const [p,len] of s.branches||[]) {if(!groups.has(p))groups.set(p,[]);groups.get(p).push({len});}
+  for(const [p,text,order] of s.groups||[]) {if(!groups.has(p))groups.set(p,[]);groups.get(p).push({text,order});}
+  for(const [p,items] of groups){
+    const origin=c[p-1];
+    let direction;
+    if(s.shape==='ring') direction=90-(p-1)*360/s.n;
+    else if(p===1) direction=150;
+    else if(p===s.n) {const a=m.n[c[p-2]],b=m.n[origin];direction=Math.atan2(a.y-b.y,b.x-a.x)*180/Math.PI;}
+    else {const a=m.n[c[p-2]],b=m.n[origin],d=m.n[c[p]];direction=Math.atan2((a.y+d.y)/2-b.y,b.x-(a.x+d.x)/2)*180/Math.PI;}
+    items.forEach((item,j)=>{
+      const a=direction+(j-(items.length-1)/2)*60;
+      let k=addFrom(m,origin,a); bond(m,origin,k,item.order||1);
+      if(item.text) label(m,k,item.text);
+      for(let t=1;t<(item.len||1);t++){const next=addFrom(m,k,a+(t%2?45:0));bond(m,k,next);k=next;}
+    });
+  }
+}
+function addSpec(s){ addMol(s.id,s.cat,s.ans,m=>buildSpec(m,s));Object.assign(MOLS[MOLS.length-1],{explanation:s.explanation,skill:s.skill||'명명 규칙'}); }
+
+addSpec({"id": "propan-1-ol", "cat": "alcohol", "n": 3, "explanation": "OH를 포함하는 3탄소 주사슬을 고르고, OH에 가까운 끝에서 번호를 매기면 1번입니다.", "groups": [[1, "OH", 1]], "branches": [], "shape": "chain", "ans": ["propan-1-ol", "1-propanol", "propanol"]});
+addSpec({"id": "butan-1-ol", "cat": "alcohol", "n": 4, "explanation": "주사슬은 탄소 4개의 butane이고 OH가 1번이므로 butan-1-ol입니다.", "groups": [[1, "OH", 1]], "branches": [], "shape": "chain", "ans": ["butan-1-ol", "1-butanol"]});
+addSpec({"id": "butan-2-ol", "cat": "alcohol", "n": 4, "explanation": "OH에 가장 작은 번호를 주면 2번입니다. butane의 e를 빼고 -2-ol을 붙입니다.", "groups": [[2, "OH", 1]], "branches": [], "shape": "chain", "ans": ["butan-2-ol", "2-butanol"]});
+addSpec({"id": "ethane-1,2-diol", "cat": "alcohol", "n": 2, "explanation": "탄소 2개의 양쪽에 OH가 하나씩 있으므로 위치 1,2와 접미사 diol을 씁니다.", "groups": [[1, "OH", 1], [2, "OH", 1]], "branches": [], "shape": "chain", "ans": ["ethane-1,2-diol", "1,2-ethanediol", "ethylene glycol"]});
+addSpec({"id": "butanal", "cat": "aldehyde", "n": 4, "explanation": "CHO의 탄소를 포함해 주사슬이 4개입니다. 알데하이드의 말단 탄소는 자동으로 1번이므로 butanal입니다.", "groups": [[1, "O", 2]], "branches": [], "shape": "chain", "ans": ["butanal"]});
+addSpec({"id": "pentanal", "cat": "aldehyde", "n": 5, "explanation": "CHO의 탄소도 주사슬에 포함하면 5탄소입니다. 알케인의 -e를 -al로 바꿉니다.", "groups": [[1, "O", 2]], "branches": [], "shape": "chain", "ans": ["pentanal"]});
+addSpec({"id": "3-methylbutanal", "cat": "aldehyde", "n": 4, "explanation": "CHO의 탄소가 1번인 4탄소 주사슬에서 메틸기가 3번에 붙습니다.", "groups": [[1, "O", 2]], "branches": [[3, 1]], "shape": "chain", "ans": ["3-methylbutanal"]});
+addSpec({"id": "pentan-2-one", "cat": "ketone", "n": 5, "explanation": "카보닐기를 포함하는 5탄소 사슬에서 C=O에 작은 번호 2를 부여합니다.", "groups": [[2, "O", 2]], "branches": [], "shape": "chain", "ans": ["pentan-2-one", "2-pentanone"]});
+addSpec({"id": "pentan-3-one", "cat": "ketone", "n": 5, "explanation": "5탄소 주사슬의 가운데인 3번 탄소가 C=O이므로 pentan-3-one입니다.", "groups": [[3, "O", 2]], "branches": [], "shape": "chain", "ans": ["pentan-3-one", "3-pentanone", "diethyl ketone"]});
+addSpec({"id": "cyclopentanone", "cat": "ketone", "n": 5, "explanation": "카보닐 탄소가 5각 고리의 일부인 고리형 케톤입니다. C=O 탄소를 1번으로 봅니다.", "groups": [[1, "O", 2]], "branches": [], "shape": "ring", "ans": ["cyclopentanone"]});
+addSpec({"id": "butanoic acid", "cat": "acid", "n": 4, "explanation": "COOH의 탄소가 1번이고 이를 포함하는 주사슬은 4탄소입니다.", "groups": [[1, "O", 2], [1, "OH", 1]], "branches": [], "shape": "chain", "ans": ["butanoic acid", "butyric acid"]});
+addSpec({"id": "pentanoic acid", "cat": "acid", "n": 5, "explanation": "카복실기의 탄소까지 세면 5탄소입니다. pentane에서 -oic acid 형태로 바꿉니다.", "groups": [[1, "O", 2], [1, "OH", 1]], "branches": [], "shape": "chain", "ans": ["pentanoic acid", "valeric acid"]});
+addSpec({"id": "ethanamine", "cat": "amine", "n": 2, "explanation": "2탄소 사슬에 NH₂가 붙은 1차 아민입니다. ethanamine 또는 ethylamine으로 부릅니다.", "groups": [[1, "NH₂", 1]], "branches": [], "shape": "chain", "ans": ["ethanamine", "ethylamine", "ethan-1-amine"]});
+addSpec({"id": "propan-2-amine", "cat": "amine", "n": 3, "explanation": "3탄소 주사슬의 2번 탄소에 NH₂가 붙어 있습니다.", "groups": [[2, "NH₂", 1]], "branches": [], "shape": "chain", "ans": ["propan-2-amine", "2-propanamine", "isopropylamine"]});
+addSpec({"id": "2-methylphenol", "cat": "phenol", "n": 6, "explanation": "OH가 붙은 탄소를 1번으로 삼으면 메틸기는 2번입니다. o-cresol이라는 관용명도 허용합니다.", "groups": [[1, "OH", 1]], "branches": [[2, 1]], "shape": "ring", "ans": ["2-methylphenol", "o-cresol"], "bonds": [[1, 2], [3, 2], [5, 2]]});
+addSpec({"id": "3-methylphenol", "cat": "phenol", "n": 6, "explanation": "OH가 붙은 탄소를 1번으로 삼으면 메틸기는 3번입니다. m-cresol이라는 관용명도 허용합니다.", "groups": [[1, "OH", 1]], "branches": [[3, 1]], "shape": "ring", "ans": ["3-methylphenol", "m-cresol"], "bonds": [[1, 2], [3, 2], [5, 2]]});
+
+function addEther(name,n,p,alkyl,ex,aliases=[]){
+ addMol(name,'ether',[name,...aliases],m=>{
+  buildSpec(m,{n,groups:[[p,'O',1]]});
+  const o=m.n.length-1, prev=m.e[m.e.length-1][0];
+  let angle=Math.atan2(m.n[prev].y-m.n[o].y,m.n[o].x-m.n[prev].x)*180/Math.PI;
+  let cur=o;for(let i=0;i<alkyl;i++){const k=addFrom(m,cur,angle+(i%2?0:50));bond(m,cur,k);cur=k;}
+ });MOLS[MOLS.length-1].explanation=ex;
+}
+addEther('1-methoxypropane',3,1,1,'산소 양쪽 중 긴 3탄소 사슬을 propane으로, 짧은 쪽을 methoxy기로 이름 붙입니다.',['methyl propyl ether']);
+addEther('2-methoxypropane',3,2,1,'3탄소 주사슬의 2번에 OCH₃, 즉 methoxy기가 붙어 있습니다.',['isopropyl methyl ether','methyl isopropyl ether']);
+addEther('1-ethoxypropane',3,1,2,'긴 쪽의 3탄소 사슬을 주사슬로 삼고, 1번의 OC₂H₅를 ethoxy기로 부릅니다.',['ethyl propyl ether']);
+function addEster(name,acidN,alkylN,ex,aliases=[]){
+ addMol(name,'ester',[name,...aliases],m=>{
+   const c=chain(m,40,150,acidN),end=c[c.length-1];
+   const o=addFrom(m,end,90);bond(m,end,o,2);label(m,o,'O');
+   const bridge=addFrom(m,end,-30);bond(m,end,bridge);label(m,bridge,'O');
+   let prev=bridge;for(let i=0;i<alkylN;i++){const k=addFrom(m,prev,i%2?-30:30);bond(m,prev,k);prev=k;}
+ });MOLS[MOLS.length-1].explanation=ex;
+}
+addEster('methyl propanoate',3,1,'산소에 직접 연결된 알킬기는 methyl, 카보닐 탄소를 포함한 산 쪽은 3탄소 propanoate입니다.',['methyl propionate']);
+addEster('ethyl propanoate',3,2,'산소 쪽의 2탄소 알킬기 ethyl을 먼저 쓰고, 3탄소 산 부분 propanoate를 뒤에 씁니다.',['ethyl propionate']);
+addEster('propyl ethanoate',2,3,'산소 쪽의 알킬기는 propyl이고, 카보닐 탄소를 포함한 산 부분은 2탄소 ethanoate입니다.',['propyl acetate','propan-1-yl ethanoate']);
+
+const ORIGINAL_EXPLANATIONS={"propane": "꺾인 지점과 양 끝을 세면 3탄소입니다. 단일 결합만 있는 사슬이므로 propane입니다.", "2-methylbutane": "가장 긴 사슬은 4탄소입니다. 메틸기에 가까운 쪽에서 번호를 매기면 2번입니다.", "2,2-dimethylpropane": "최장 사슬은 3탄소이며 나머지 두 메틸기가 모두 2번에 붙습니다. 같은 치환기 2개에는 di-를 씁니다.", "3-ethylpentane": "최장 사슬은 5탄소입니다. 3번 탄소에 2탄소 가지인 ethyl기가 붙습니다.", "hexane": "가지 없는 단일 결합 사슬의 탄소가 6개이므로 hexane입니다.", "propene": "이중 결합을 포함한 3탄소 사슬입니다. 이중 결합의 위치는 1번으로 정해지므로 propene이라고 씁니다.", "2-butene": "4탄소 사슬의 2번과 3번 사이에 이중 결합이 있으므로 but-2-ene입니다.", "2-methyl-2-butene": "이중 결합을 포함하는 주사슬은 4탄소입니다. 이중 결합은 2번이고, 동률인 두 방향 중 메틸기가 2번이 되도록 번호를 매깁니다.", "1-pentene": "5탄소 사슬에서 이중 결합이 있는 끝부터 번호를 매기면 1번입니다.", "propyne": "삼중 결합을 포함하는 3탄소 사슬이므로 propyne입니다.", "1-butyne": "삼중 결합이 말단에 있는 4탄소 사슬입니다. 삼중 결합에 번호 1을 줍니다.", "2-butyne": "4탄소 사슬의 가운데 2번과 3번 사이가 삼중 결합입니다.", "cyclopropane": "단일 결합으로 이루어진 3탄소 고리에는 cyclo-와 propane을 결합합니다.", "cyclopentane": "단일 결합으로 이루어진 5탄소 고리이므로 cyclopentane입니다.", "methylcyclohexane": "6탄소 고리가 모체이며 가지는 methyl입니다. 치환기가 하나뿐이면 위치 번호 1을 생략합니다.", "1,2-dimethylcyclobutane": "4탄소 고리의 서로 이웃한 두 탄소에 메틸기가 있습니다. 가장 작은 위치 번호는 1,2입니다.", "cyclopentene": "5탄소 고리에 이중 결합 하나가 있습니다. 치환기가 없어 이중 결합 위치 1을 생략할 수 있습니다.", "cyclohexene": "6탄소 고리에 이중 결합 하나가 있으므로 cyclohexene입니다.", "1-methylcyclohexene": "이중 결합의 탄소를 1,2번으로 정하고, 메틸기가 1번이 되도록 방향을 고릅니다.", "cyclooctyne": "8탄소 고리 안에 삼중 결합 하나가 있습니다. 고리 골격은 단순화해 그렸습니다.", "benzene": "6각 고리에 이중 결합 3개가 번갈아 나타나는 벤젠 골격입니다.", "toluene": "벤젠에 메틸기 하나가 붙은 구조입니다. toluene과 methylbenzene을 모두 허용합니다.", "ethylbenzene": "벤젠에 2탄소 곁사슬인 ethyl기가 붙어 있습니다.", "1,4-dimethylbenzene": "벤젠의 서로 마주 보는 1,4번에 메틸기가 있습니다. para 위치이며 p-xylene이라고도 부릅니다.", "ethanol": "2탄소 사슬에 OH가 붙은 알코올이므로 ethanol입니다.", "2-propanol": "3탄소 주사슬의 2번에 OH가 있으므로 propan-2-ol입니다.", "2-methyl-2-propanol": "OH를 포함하는 최장 사슬은 3탄소입니다. OH와 메틸기가 모두 2번에 있습니다.", "cyclohexanol": "6탄소 고리에 OH가 붙어 있습니다. OH가 붙은 고리 탄소를 1번으로 봅니다.", "dimethyl-ether": "산소 양쪽이 각각 1탄소 메틸기입니다. 치환 명명법은 methoxymethane입니다.", "diethyl-ether": "산소 양쪽이 각각 2탄소 에틸기입니다. 치환 명명법은 ethoxyethane입니다.", "ethyl-methyl-ether": "더 긴 2탄소 사슬을 ethane으로 삼고, OCH₃ 부분을 methoxy기로 이름 붙입니다.", "ethanal": "말단 C=O 탄소에는 생략된 수소가 하나 있습니다. 그 탄소까지 세면 2탄소 알데하이드입니다.", "propanal": "CHO 탄소를 포함한 사슬이 3탄소이므로 propanal입니다.", "2-methylpropanal": "CHO 탄소를 1번으로 세는 3탄소 주사슬의 2번에 methyl기가 있습니다.", "propanone": "3탄소 사슬 가운데에 C=O가 있습니다. propanone 또는 acetone으로 부릅니다.", "2-butanone": "카보닐기를 포함하는 4탄소 주사슬에서 C=O에 작은 번호 2를 부여합니다.", "4-methyl-2-pentanone": "C=O를 포함하는 5탄소 주사슬에서 카보닐기에 우선적으로 작은 번호 2를 줍니다. 메틸기는 4번입니다.", "cyclohexanone": "C=O의 탄소가 6각 고리 자체에 포함된 케톤입니다.", "methyl-acetate": "산소 쪽 알킬기 methyl을 먼저 쓰고, 2탄소 산 부분 ethanoate를 뒤에 씁니다.", "ethyl-acetate": "산소 쪽은 ethyl이고 산 부분은 ethanoate입니다. ethyl acetate도 허용합니다.", "ethyl-formate": "산소 쪽 알킬기는 ethyl이고 산 부분은 탄소 1개의 methanoate입니다.", "acetic-acid": "COOH의 탄소까지 포함하면 2탄소 카복실산입니다. ethanoic acid와 acetic acid를 모두 허용합니다.", "propanoic-acid": "COOH 탄소까지 포함하는 주사슬은 3탄소입니다.", "2-methylpropanoic-acid": "카복실기의 탄소를 1번으로 하는 3탄소 사슬에서 메틸기는 2번에 있습니다.", "benzoic-acid": "벤젠고리에 COOH가 직접 연결된 카복실산의 이름은 benzoic acid입니다.", "methanamine": "1탄소 methyl기에 NH₂가 연결된 1차 아민입니다.", "dimethylamine": "질소에 메틸기가 2개 붙은 2차 아민입니다. N-methylmethanamine도 허용합니다.", "trimethylamine": "질소에 메틸기 3개가 붙은 3차 아민입니다. N,N-dimethylmethanamine으로도 표현합니다.", "aniline": "벤젠에 NH₂가 직접 붙은 구조입니다. aniline 또는 benzenamine으로 부릅니다.", "phenol": "OH가 벤젠고리에 직접 붙어 있으므로 phenol입니다.", "4-methylphenol": "OH가 붙은 탄소를 1번으로 하면 메틸기가 4번에 있습니다. p-cresol도 허용합니다.", "2,4-dimethylphenol": "OH가 붙은 탄소를 1번으로 삼고, 메틸기들의 위치 번호가 2,4가 되도록 번호 방향을 고릅니다."};
+const MODERN_ALIASES={"2-butene": ["but-2-ene"], "2-methyl-2-butene": ["2-methylbut-2-ene"], "1-pentene": ["pent-1-ene"], "1-butyne": ["but-1-yne"], "2-butyne": ["but-2-yne"], "2-propanol": ["propan-2-ol"], "2-methyl-2-propanol": ["2-methylpropan-2-ol"], "2-butanone": ["butan-2-one", "butanone"], "4-methyl-2-pentanone": ["4-methylpentan-2-one"], "methyl-acetate": ["methyl ethanoate"], "ethyl-acetate": ["ethyl ethanoate"], "ethyl-formate": ["ethyl methanoate"], "trimethylamine": ["N,N-dimethylmethanamine"], "propanone": ["propan-2-one"]};
+Object.assign(MODERN_ALIASES,{'1-methylcyclohexene':['1-methylcyclohex-1-ene'],'cyclopentene':['cyclopent-1-ene'],'cyclohexene':['cyclohex-1-ene'],'cyclooctyne':['cyclooct-1-yne']});
+MOLS.forEach(m=>{m.explanation=m.explanation||ORIGINAL_EXPLANATIONS[m.id];if(MODERN_ALIASES[m.id])m.ans=[...MODERN_ALIASES[m.id],...m.ans];});
+// Keep the bonds around open-chain sp carbons collinear.
+for(const [id,n,bonds] of [['propyne',3,[[1,3]]],['1-butyne',4,[[1,3]]],['2-butyne',4,[[2,3]]]]) MOLS.find(m=>m.id===id).build=m=>buildSpec(m,{n,bonds});
+
+addSpec({"id": "ethane", "cat": "alkane", "ans": ["ethane"], "shape": "chain", "n": 2, "bonds": [], "branches": [], "explanation": "가지 없이 이어진 탄소가 2개이며 모두 단일 결합입니다. 탄소 수에 맞는 어근과 알케인 접미사 -ane을 결합하여 ethane(에테인)으로 이름 붙입니다.", "skill": "곧은 사슬 탄소 수"});
+addSpec({"id": "butane", "cat": "alkane", "ans": ["butane"], "shape": "chain", "n": 4, "bonds": [], "branches": [], "explanation": "가지 없이 이어진 탄소가 4개이며 모두 단일 결합입니다. 탄소 수에 맞는 어근과 알케인 접미사 -ane을 결합하여 butane(뷰테인)으로 이름 붙입니다.", "skill": "곧은 사슬 탄소 수"});
+addSpec({"id": "pentane", "cat": "alkane", "ans": ["pentane"], "shape": "chain", "n": 5, "bonds": [], "branches": [], "explanation": "가지 없이 이어진 탄소가 5개이며 모두 단일 결합입니다. 탄소 수에 맞는 어근과 알케인 접미사 -ane을 결합하여 pentane(펜테인)으로 이름 붙입니다.", "skill": "곧은 사슬 탄소 수"});
+addSpec({"id": "heptane", "cat": "alkane", "ans": ["heptane"], "shape": "chain", "n": 7, "bonds": [], "branches": [], "explanation": "가지 없이 이어진 탄소가 7개이며 모두 단일 결합입니다. 탄소 수에 맞는 어근과 알케인 접미사 -ane을 결합하여 heptane(헵테인)으로 이름 붙입니다.", "skill": "곧은 사슬 탄소 수"});
+addSpec({"id": "octane", "cat": "alkane", "ans": ["octane"], "shape": "chain", "n": 8, "bonds": [], "branches": [], "explanation": "가지 없이 이어진 탄소가 8개이며 모두 단일 결합입니다. 탄소 수에 맞는 어근과 알케인 접미사 -ane을 결합하여 octane(옥테인)으로 이름 붙입니다.", "skill": "곧은 사슬 탄소 수"});
+addSpec({"id": "nonane", "cat": "alkane", "ans": ["nonane"], "shape": "chain", "n": 9, "bonds": [], "branches": [], "explanation": "가지 없이 이어진 탄소가 9개이며 모두 단일 결합입니다. 탄소 수에 맞는 어근과 알케인 접미사 -ane을 결합하여 nonane(노네인)으로 이름 붙입니다.", "skill": "곧은 사슬 탄소 수"});
+addSpec({"id": "decane", "cat": "alkane", "ans": ["decane"], "shape": "chain", "n": 10, "bonds": [], "branches": [], "explanation": "가지 없이 이어진 탄소가 10개이며 모두 단일 결합입니다. 탄소 수에 맞는 어근과 알케인 접미사 -ane을 결합하여 decane(데케인)으로 이름 붙입니다.", "skill": "곧은 사슬 탄소 수"});
+addSpec({"id": "2-methylpropane", "cat": "alkane", "ans": ["2-methylpropane", "isobutane"], "shape": "chain", "n": 3, "bonds": [], "branches": [[2, 1]], "explanation": "가장 긴 연속 사슬은 탄소 3개의 propane이고, 2번 탄소에 methyl기가 있습니다. 가지 탄소까지 한 줄로 셀 수는 없으므로 부모 사슬을 butane으로 정하지 않습니다.", "skill": "최장 사슬 선택"});
+addSpec({"id": "2-methylpentane", "cat": "alkane", "ans": ["2-methylpentane"], "shape": "chain", "n": 5, "bonds": [], "branches": [[2, 1]], "explanation": "가장 긴 사슬은 pentane입니다. methyl기의 번호가 4가 아닌 2가 되도록 가까운 끝에서 번호를 매깁니다.", "skill": "낮은 가지 번호"});
+addSpec({"id": "3-methylpentane", "cat": "alkane", "ans": ["3-methylpentane"], "shape": "chain", "n": 5, "bonds": [], "branches": [[3, 1]], "explanation": "탄소 5개의 최장 사슬 중앙에 methyl기가 있습니다. 어느 끝에서 세어도 치환기 번호가 3이므로 3-methylpentane입니다.", "skill": "중앙 가지 찾기"});
+addSpec({"id": "2,2-dimethylbutane", "cat": "alkane", "ans": ["2,2-dimethylbutane"], "shape": "chain", "n": 4, "bonds": [], "branches": [[2, 1], [2, 1]], "explanation": "최장 사슬은 butane이고 두 methyl기가 같은 탄소에 붙어 있습니다. 번호는 3,3보다 작은 2,2를 쓰며 동일 치환기 두 개를 dimethyl로 나타냅니다.", "skill": "같은 탄소의 두 가지"});
+addSpec({"id": "2,3-dimethylbutane", "cat": "alkane", "ans": ["2,3-dimethylbutane"], "shape": "chain", "n": 4, "bonds": [], "branches": [[2, 1], [3, 1]], "explanation": "최장 사슬은 탄소 4개이며 methyl기가 2번과 3번에 있습니다. 두 위치를 쉼표로 구분하고 dimethyl을 사용합니다.", "skill": "동일 치환기 접두사"});
+addSpec({"id": "2-methylhexane", "cat": "alkane", "ans": ["2-methylhexane"], "shape": "chain", "n": 6, "bonds": [], "branches": [[2, 1]], "explanation": "최장 사슬의 탄소가 6개이므로 hexane이 부모 이름입니다. methyl기에 가까운 끝에서 세면 치환기 번호는 2입니다.", "skill": "최장 사슬과 번호"});
+addSpec({"id": "3-methylhexane", "cat": "alkane", "ans": ["3-methylhexane"], "shape": "chain", "n": 6, "bonds": [], "branches": [[3, 1]], "explanation": "탄소 6개의 사슬에서 methyl기의 번호는 한쪽으로 세면 3, 반대쪽으로 세면 4입니다. 더 작은 번호 3을 선택합니다.", "skill": "번호 방향 선택"});
+addSpec({"id": "2,2-dimethylpentane", "cat": "alkane", "ans": ["2,2-dimethylpentane"], "shape": "chain", "n": 5, "bonds": [], "branches": [[2, 1], [2, 1]], "explanation": "부모 사슬은 pentane이며 같은 탄소에 methyl기 두 개가 붙어 있습니다. 4,4 대신 2,2를 선택하여 2,2-dimethylpentane으로 씁니다.", "skill": "중복 위치 번호"});
+addSpec({"id": "2,3-dimethylpentane", "cat": "alkane", "ans": ["2,3-dimethylpentane"], "shape": "chain", "n": 5, "bonds": [], "branches": [[2, 1], [3, 1]], "explanation": "최장 사슬은 pentane이고 methyl기의 위치 번호 후보는 2,3과 3,4입니다. 첫 번째로 다른 번호가 더 작은 2,3을 선택합니다.", "skill": "최저 위치 번호 집합"});
+addSpec({"id": "2,4-dimethylpentane", "cat": "alkane", "ans": ["2,4-dimethylpentane"], "shape": "chain", "n": 5, "bonds": [], "branches": [[2, 1], [4, 1]], "explanation": "탄소 5개의 최장 사슬 양쪽에 methyl기가 하나씩 있습니다. 어느 방향으로 번호를 매겨도 위치는 2,4입니다.", "skill": "대칭 구조 번호"});
+addSpec({"id": "3,3-dimethylpentane", "cat": "alkane", "ans": ["3,3-dimethylpentane"], "shape": "chain", "n": 5, "bonds": [], "branches": [[3, 1], [3, 1]], "explanation": "탄소 5개의 최장 사슬에서 중앙 탄소에 methyl기가 두 개 붙어 있습니다. 두 치환기의 위치를 모두 적어 3,3-dimethylpentane으로 명명합니다.", "skill": "위치 번호 반복"});
+addSpec({"id": "3-ethylhexane", "cat": "alkane", "ans": ["3-ethylhexane"], "shape": "chain", "n": 6, "bonds": [], "branches": [[3, 2]], "explanation": "가장 긴 연속 사슬은 탄소 6개이므로 부모 이름은 hexane입니다. 남은 탄소 2개의 가지는 ethyl이며 위치 번호 3을 받습니다.", "skill": "에틸 가지 구별"});
+addSpec({"id": "2,2,3-trimethylbutane", "cat": "alkane", "ans": ["2,2,3-trimethylbutane"], "shape": "chain", "n": 4, "bonds": [], "branches": [[2, 1], [2, 1], [3, 1]], "explanation": "최장 사슬은 butane이고 methyl기가 세 개 있습니다. 위치 번호를 차례로 비교하면 2,2,3이 2,3,3보다 작으므로 전자를 사용합니다.", "skill": "첫 차이로 번호 비교"});
+addSpec({"id": "2,2,3-trimethylpentane", "cat": "alkane", "ans": ["2,2,3-trimethylpentane"], "shape": "chain", "n": 5, "bonds": [], "branches": [[2, 1], [2, 1], [3, 1]], "explanation": "최장 사슬은 pentane이며 methyl기 세 개의 위치는 2,2,3입니다. 반대 방향의 3,4,4보다 작은 번호 집합을 선택하고 trimethyl을 붙입니다.", "skill": "삼중 치환기 번호"});
+addSpec({"id": "2,2,4-trimethylpentane", "cat": "alkane", "ans": ["2,2,4-trimethylpentane", "isooctane"], "shape": "chain", "n": 5, "bonds": [], "branches": [[2, 1], [2, 1], [4, 1]], "explanation": "부모 사슬은 pentane이며 methyl기 세 개가 붙어 있습니다. 2,2,4와 2,4,4를 순서대로 비교하면 두 번째 번호가 작은 2,2,4가 선택됩니다.", "skill": "첫 차이로 번호 비교"});
+addSpec({"id": "2,3,3-trimethylpentane", "cat": "alkane", "ans": ["2,3,3-trimethylpentane"], "shape": "chain", "n": 5, "bonds": [], "branches": [[2, 1], [3, 1], [3, 1]], "explanation": "최장 사슬은 pentane입니다. methyl기의 위치 번호 후보 2,3,3과 3,3,4 중 첫 번호가 작은 2,3,3을 선택합니다.", "skill": "복수 가지 번호"});
+addSpec({"id": "3-ethyl-2-methylhexane", "cat": "alkane", "ans": ["3-ethyl-2-methylhexane"], "shape": "chain", "n": 6, "bonds": [], "branches": [[3, 2], [2, 1]], "explanation": "길이가 같은 탄소 6개의 사슬 중 가지 수가 더 많은 사슬을 부모로 선택합니다. 가지 번호는 2,3이며 이름에는 알파벳순으로 ethyl을 methyl보다 먼저 씁니다.", "skill": "동률 사슬과 알파벳순"});
+addSpec({"id": "3-ethyl-4-methylhexane", "cat": "alkane", "ans": ["3-ethyl-4-methylhexane"], "shape": "chain", "n": 6, "bonds": [], "branches": [[3, 2], [4, 1]], "explanation": "최장 사슬은 hexane이고 양쪽 번호 방향 모두 가지 번호 집합은 3,4입니다. 이때 알파벳순으로 먼저 쓰는 ethyl이 더 작은 번호 3을 받도록 정합니다.", "skill": "번호 동률과 알파벳순"});
+addSpec({"id": "ethene", "cat": "alkene", "ans": ["ethene", "ethylene"], "shape": "chain", "n": 2, "bonds": [[1, 2]], "branches": [], "explanation": "탄소 두 개 사이에 이중 결합 하나가 있습니다. 가능한 이중 결합 위치가 하나뿐이므로 위치 번호 없이 ethene으로 씁니다.", "skill": "이중 결합 접미사"});
+addSpec({"id": "but-1-ene", "cat": "alkene", "ans": ["but-1-ene", "1-butene"], "shape": "chain", "n": 4, "bonds": [[1, 2]], "branches": [], "explanation": "이중 결합을 포함하는 탄소 4개의 사슬이 부모입니다. 이중 결합에 가까운 끝에서 번호를 매겨 1을 부여합니다.", "skill": "말단 이중 결합"});
+addSpec({"id": "pent-2-ene", "cat": "alkene", "ans": ["pent-2-ene", "2-pentene"], "shape": "chain", "n": 5, "bonds": [[2, 2]], "branches": [], "explanation": "부모 사슬의 탄소는 5개입니다. 이중 결합의 위치 번호가 3보다 작은 2가 되도록 번호를 매겨 pent-2-ene으로 씁니다.", "skill": "내부 이중 결합"});
+addSpec({"id": "hex-1-ene", "cat": "alkene", "ans": ["hex-1-ene", "1-hexene"], "shape": "chain", "n": 6, "bonds": [[1, 2]], "branches": [], "explanation": "탄소 6개의 사슬 끝에 이중 결합이 있습니다. 이중 결합이 시작되는 탄소의 번호 1을 -ene 앞에 표시합니다.", "skill": "이중 결합 위치 표기"});
+addSpec({"id": "hex-2-ene", "cat": "alkene", "ans": ["hex-2-ene", "2-hexene"], "shape": "chain", "n": 6, "bonds": [[2, 2]], "branches": [], "explanation": "탄소 6개의 부모 사슬에서 이중 결합 번호 후보는 2와 4입니다. 더 작은 2를 선택하여 hex-2-ene으로 명명합니다.", "skill": "이중 결합 최저 번호"});
+addSpec({"id": "hex-3-ene", "cat": "alkene", "ans": ["hex-3-ene", "3-hexene"], "shape": "chain", "n": 6, "bonds": [[3, 2]], "branches": [], "explanation": "탄소 6개 사슬의 가운데에 이중 결합이 있습니다. 어느 쪽에서 세어도 이중 결합 시작 탄소는 3번입니다.", "skill": "중앙 이중 결합"});
+addSpec({"id": "2-methylprop-1-ene", "cat": "alkene", "ans": ["2-methylprop-1-ene", "2-methylpropene", "isobutene", "isobutylene"], "shape": "chain", "n": 3, "bonds": [[1, 2]], "branches": [[2, 1]], "explanation": "이중 결합을 포함하는 최장 사슬은 탄소 3개입니다. 이중 결합은 1번에서 시작하고 2번 탄소에 methyl기가 있습니다.", "skill": "분지 알켄 부모 사슬"});
+addSpec({"id": "2-methylbut-1-ene", "cat": "alkene", "ans": ["2-methylbut-1-ene", "2-methyl-1-butene"], "shape": "chain", "n": 4, "bonds": [[1, 2]], "branches": [[2, 1]], "explanation": "이중 결합을 포함하는 최장 사슬은 but-1-ene입니다. 이중 결합의 2번 탄소에 methyl기가 붙어 있으므로 2-methyl을 앞에 씁니다.", "skill": "이중 결합 탄소의 가지"});
+addSpec({"id": "3-methylbut-1-ene", "cat": "alkene", "ans": ["3-methylbut-1-ene", "3-methyl-1-butene"], "shape": "chain", "n": 4, "bonds": [[1, 2]], "branches": [[3, 1]], "explanation": "부모 사슬은 탄소 4개이며 이중 결합에 가장 낮은 번호 1을 줍니다. 이 방향에서 methyl기의 번호는 3입니다.", "skill": "이중 결합 번호 우선"});
+addSpec({"id": "2-methylpent-1-ene", "cat": "alkene", "ans": ["2-methylpent-1-ene", "2-methyl-1-pentene"], "shape": "chain", "n": 5, "bonds": [[1, 2]], "branches": [[2, 1]], "explanation": "이중 결합을 포함하는 탄소 5개의 사슬을 선택합니다. 이중 결합은 1번, methyl기는 2번에 있어 2-methylpent-1-ene입니다.", "skill": "분지 알켄 위치 번호"});
+addSpec({"id": "3-methylpent-1-ene", "cat": "alkene", "ans": ["3-methylpent-1-ene", "3-methyl-1-pentene"], "shape": "chain", "n": 5, "bonds": [[1, 2]], "branches": [[3, 1]], "explanation": "이중 결합을 포함한 최장 사슬은 pent-1-ene입니다. 이중 결합 쪽에서 세었을 때 중앙의 methyl기 위치는 3입니다.", "skill": "이중 결합 포함 사슬"});
+addSpec({"id": "4-methylpent-1-ene", "cat": "alkene", "ans": ["4-methylpent-1-ene", "4-methyl-1-pentene"], "shape": "chain", "n": 5, "bonds": [[1, 2]], "branches": [[4, 1]], "explanation": "부모 사슬은 pentene이며 이중 결합에 더 낮은 위치 번호를 먼저 부여합니다. 따라서 methyl기가 4번이 되더라도 이중 결합이 1번인 방향을 선택합니다.", "skill": "다중 결합 번호 우선"});
+addSpec({"id": "3-methylpent-2-ene", "cat": "alkene", "ans": ["3-methylpent-2-ene", "3-methyl-2-pentene"], "shape": "chain", "n": 5, "bonds": [[2, 2]], "branches": [[3, 1]], "explanation": "탄소 5개의 사슬에서 이중 결합에 낮은 번호 2를 줍니다. 이중 결합을 이루는 3번 탄소에 methyl기가 있습니다.", "skill": "내부 알켄의 가지"});
+addSpec({"id": "4-methylpent-2-ene", "cat": "alkene", "ans": ["4-methylpent-2-ene", "4-methyl-2-pentene"], "shape": "chain", "n": 5, "bonds": [[2, 2]], "branches": [[4, 1]], "explanation": "번호 방향을 정할 때 methyl기보다 이중 결합의 낮은 번호를 우선합니다. 이중 결합이 2번이 되는 방향을 택하면 methyl기의 위치는 4번입니다.", "skill": "다중 결합과 가지 우선순위"});
+addSpec({"id": "buta-1,3-diene", "cat": "alkene", "ans": ["buta-1,3-diene", "1,3-butadiene"], "shape": "chain", "n": 4, "bonds": [[1, 2], [3, 2]], "branches": [], "explanation": "탄소 4개의 사슬에 이중 결합이 두 개 있으므로 -diene을 사용합니다. 두 이중 결합의 시작 위치 1,3을 모두 적습니다.", "skill": "다이엔 명명"});
+addSpec({"id": "penta-1,3-diene", "cat": "alkene", "ans": ["penta-1,3-diene", "1,3-pentadiene"], "shape": "chain", "n": 5, "bonds": [[1, 2], [3, 2]], "branches": [], "explanation": "탄소 5개의 사슬에 이중 결합이 두 개 있습니다. 위치 번호 후보 1,3과 2,4를 비교하여 더 작은 1,3을 선택합니다.", "skill": "복수 이중 결합 번호"});
+addSpec({"id": "hexa-1,5-diene", "cat": "alkene", "ans": ["hexa-1,5-diene", "1,5-hexadiene"], "shape": "chain", "n": 6, "bonds": [[1, 2], [5, 2]], "branches": [], "explanation": "탄소 6개의 사슬 양 끝에 이중 결합이 하나씩 있습니다. 이중 결합 두 개를 -diene으로 나타내며 위치는 1,5입니다.", "skill": "분리된 이중 결합"});
+addSpec({"id": "2-methylbuta-1,3-diene", "cat": "alkene", "ans": ["2-methylbuta-1,3-diene", "2-methyl-1,3-butadiene", "isoprene"], "shape": "chain", "n": 4, "bonds": [[1, 2], [3, 2]], "branches": [[2, 1]], "explanation": "두 이중 결합을 포함하는 부모 사슬은 buta-1,3-diene입니다. 양방향의 이중 결합 번호가 같으므로 methyl기가 3번 대신 2번이 되는 방향을 선택합니다.", "skill": "다중 결합 동률의 가지 번호"});
+addSpec({"id": "pent-1-yne", "cat": "alkyne", "ans": ["pent-1-yne", "1-pentyne"], "shape": "chain", "n": 5, "bonds": [[1, 3]], "branches": [], "explanation": "탄소 5개의 사슬에 삼중 결합 하나가 있습니다. 삼중 결합에 가까운 끝에서 세어 위치 번호 1을 부여합니다.", "skill": "말단 삼중 결합"});
+addSpec({"id": "pent-2-yne", "cat": "alkyne", "ans": ["pent-2-yne", "2-pentyne"], "shape": "chain", "n": 5, "bonds": [[2, 3]], "branches": [], "explanation": "부모 사슬은 탄소 5개이며 삼중 결합은 내부에 있습니다. 위치 번호 3보다 작은 2를 선택하여 pent-2-yne으로 씁니다.", "skill": "내부 삼중 결합"});
+addSpec({"id": "hex-1-yne", "cat": "alkyne", "ans": ["hex-1-yne", "1-hexyne"], "shape": "chain", "n": 6, "bonds": [[1, 3]], "branches": [], "explanation": "탄소 6개의 사슬 끝에 삼중 결합이 있습니다. 부모 이름에 삼중 결합 시작 위치 1과 접미사 -yne을 표시합니다.", "skill": "삼중 결합 위치 표기"});
+addSpec({"id": "hex-2-yne", "cat": "alkyne", "ans": ["hex-2-yne", "2-hexyne"], "shape": "chain", "n": 6, "bonds": [[2, 3]], "branches": [], "explanation": "탄소 6개의 부모 사슬에서 삼중 결합 번호는 방향에 따라 2 또는 4입니다. 더 작은 번호 2를 선택합니다.", "skill": "삼중 결합 최저 번호"});
+addSpec({"id": "hex-3-yne", "cat": "alkyne", "ans": ["hex-3-yne", "3-hexyne"], "shape": "chain", "n": 6, "bonds": [[3, 3]], "branches": [], "explanation": "탄소 6개의 사슬 중앙에 삼중 결합이 있습니다. 어느 끝에서 번호를 매겨도 삼중 결합은 3번에서 시작합니다.", "skill": "중앙 삼중 결합"});
+addSpec({"id": "3-methylbut-1-yne", "cat": "alkyne", "ans": ["3-methylbut-1-yne", "3-methyl-1-butyne"], "shape": "chain", "n": 4, "bonds": [[1, 3]], "branches": [[3, 1]], "explanation": "삼중 결합을 포함하는 최장 사슬은 탄소 4개입니다. 삼중 결합에 1번을 주면 methyl기의 위치는 3번입니다.", "skill": "분지 알카인 부모 사슬"});
+addSpec({"id": "3-methylpent-1-yne", "cat": "alkyne", "ans": ["3-methylpent-1-yne", "3-methyl-1-pentyne"], "shape": "chain", "n": 5, "bonds": [[1, 3]], "branches": [[3, 1]], "explanation": "삼중 결합을 포함하는 탄소 5개의 사슬을 선택합니다. 삼중 결합은 1번에서 시작하고 methyl기는 3번 탄소에 있습니다.", "skill": "분지 알카인 위치 번호"});
+addSpec({"id": "4-methylpent-1-yne", "cat": "alkyne", "ans": ["4-methylpent-1-yne", "4-methyl-1-pentyne"], "shape": "chain", "n": 5, "bonds": [[1, 3]], "branches": [[4, 1]], "explanation": "삼중 결합의 위치 번호를 가지 번호보다 우선하여 낮춥니다. 따라서 삼중 결합을 1번으로 두고 methyl기를 4번으로 표시합니다.", "skill": "삼중 결합 번호 우선"});
+addSpec({"id": "4-methylpent-2-yne", "cat": "alkyne", "ans": ["4-methylpent-2-yne", "4-methyl-2-pentyne"], "shape": "chain", "n": 5, "bonds": [[2, 3]], "branches": [[4, 1]], "explanation": "부모 사슬은 탄소 5개이며 삼중 결합에 낮은 번호 2를 줍니다. 이 방향에서 methyl기는 4번 탄소에 붙어 있습니다.", "skill": "내부 알카인의 가지"});
+addSpec({"id": "hepta-1,3-diyne", "cat": "alkyne", "ans": ["hepta-1,3-diyne", "1,3-heptadiyne"], "shape": "chain", "n": 7, "bonds": [[1, 3], [3, 3]], "branches": [], "explanation": "탄소 7개의 사슬에 삼중 결합이 두 개 있으므로 -diyne을 사용합니다. 위치 번호 집합 1,3이 반대쪽의 4,6보다 작습니다.", "skill": "다이인 명명"});
+addSpec({"id": "hexa-1,5-diyne", "cat": "alkyne", "ans": ["hexa-1,5-diyne", "1,5-hexadiyne"], "shape": "chain", "n": 6, "bonds": [[1, 3], [5, 3]], "branches": [], "explanation": "탄소 6개의 사슬 양 끝에 삼중 결합이 있습니다. 삼중 결합 두 개의 시작 위치 1,5와 접미사 -diyne을 사용합니다.", "skill": "분리된 삼중 결합"});
+addSpec({"id": "but-1-en-3-yne", "cat": "alkyne", "ans": ["but-1-en-3-yne", "1-buten-3-yne", "vinylacetylene"], "shape": "chain", "n": 4, "bonds": [[1, 2], [3, 3]], "branches": [], "explanation": "이중 결합과 삼중 결합을 함께 포함하는 탄소 4개의 사슬입니다. 양방향의 다중 결합 번호 집합이 1,3으로 같으므로 이중 결합에 더 낮은 번호 1을 줍니다.", "skill": "엔인 동률 번호"});
+addSpec({"id": "pent-1-en-4-yne", "cat": "alkyne", "ans": ["pent-1-en-4-yne", "1-penten-4-yne"], "shape": "chain", "n": 5, "bonds": [[1, 2], [4, 3]], "branches": [], "explanation": "탄소 5개의 사슬 양 끝에 이중 결합과 삼중 결합이 있습니다. 다중 결합 위치가 양방향 모두 1,4이므로 이중 결합을 1번으로 정하고 en을 yne보다 먼저 씁니다.", "skill": "이중·삼중 결합 함께 명명"});
+addSpec({"id": "cyclobutane", "cat": "cycloalkane", "ans": ["cyclobutane"], "shape": "ring", "n": 4, "bonds": [], "branches": [], "explanation": "단일 결합으로 이루어진 탄소 4개의 고리입니다. 같은 탄소 수의 알케인 이름 앞에 cyclo-를 붙여 cyclobutane으로 씁니다.", "skill": "고리 탄소 수"});
+addSpec({"id": "cyclohexane", "cat": "cycloalkane", "ans": ["cyclohexane"], "shape": "ring", "n": 6, "bonds": [], "branches": [], "explanation": "단일 결합으로 이루어진 탄소 6개의 고리입니다. 같은 탄소 수의 알케인 이름 앞에 cyclo-를 붙여 cyclohexane으로 씁니다.", "skill": "고리 탄소 수"});
+addSpec({"id": "cycloheptane", "cat": "cycloalkane", "ans": ["cycloheptane"], "shape": "ring", "n": 7, "bonds": [], "branches": [], "explanation": "단일 결합으로 이루어진 탄소 7개의 고리입니다. 같은 탄소 수의 알케인 이름 앞에 cyclo-를 붙여 cycloheptane으로 씁니다.", "skill": "고리 탄소 수"});
+addSpec({"id": "cyclooctane", "cat": "cycloalkane", "ans": ["cyclooctane"], "shape": "ring", "n": 8, "bonds": [], "branches": [], "explanation": "단일 결합으로 이루어진 탄소 8개의 고리입니다. 같은 탄소 수의 알케인 이름 앞에 cyclo-를 붙여 cyclooctane으로 씁니다.", "skill": "고리 탄소 수"});
+addSpec({"id": "methylcyclopropane", "cat": "cycloalkane", "ans": ["methylcyclopropane"], "shape": "ring", "n": 3, "bonds": [], "branches": [[1, 1]], "explanation": "탄소 3개의 고리를 부모인 cyclopropane으로 선택하고 탄소 1개의 가지를 methyl로 표시합니다. 치환기가 하나뿐이므로 위치 번호 1은 생략합니다.", "skill": "단일 치환 고리"});
+addSpec({"id": "ethylcyclobutane", "cat": "cycloalkane", "ans": ["ethylcyclobutane"], "shape": "ring", "n": 4, "bonds": [], "branches": [[1, 2]], "explanation": "탄소 4개의 고리가 탄소 2개의 가지보다 크므로 고리를 부모로 선택합니다. 가지는 ethyl이며 단일 치환 고리의 위치 번호는 생략합니다.", "skill": "고리와 곁사슬 선택"});
+addSpec({"id": "1,1-dimethylcyclopentane", "cat": "cycloalkane", "ans": ["1,1-dimethylcyclopentane"], "shape": "ring", "n": 5, "bonds": [], "branches": [[1, 1], [1, 1]], "explanation": "cyclopentane 고리의 같은 탄소에 methyl기 두 개가 붙어 있습니다. 치환된 탄소를 1번으로 잡아 두 위치를 1,1로 표시합니다.", "skill": "고리의 같은 위치 치환"});
+addSpec({"id": "1,2-dimethylcyclopentane", "cat": "cycloalkane", "ans": ["1,2-dimethylcyclopentane"], "shape": "ring", "n": 5, "bonds": [], "branches": [[1, 1], [2, 1]], "explanation": "cyclopentane 고리의 이웃한 두 탄소에 methyl기가 붙어 있습니다. 고리 번호 방향을 선택하여 1,5 대신 더 낮은 1,2를 사용합니다.", "skill": "이웃한 고리 치환기"});
+addSpec({"id": "1,3-dimethylcyclopentane", "cat": "cycloalkane", "ans": ["1,3-dimethylcyclopentane"], "shape": "ring", "n": 5, "bonds": [], "branches": [[1, 1], [3, 1]], "explanation": "cyclopentane 고리에서 methyl기 사이에 고리 탄소 하나가 있습니다. 치환기 번호가 1,4가 아닌 1,3이 되도록 번호를 매깁니다.", "skill": "고리 최저 번호"});
+addSpec({"id": "1-ethyl-2-methylcyclohexane", "cat": "cycloalkane", "ans": ["1-ethyl-2-methylcyclohexane"], "shape": "ring", "n": 6, "bonds": [], "branches": [[1, 2], [2, 1]], "explanation": "cyclohexane 고리의 이웃한 위치에 ethyl기와 methyl기가 있습니다. 가능한 최저 번호 집합은 1,2이며, 동률에서는 알파벳순으로 앞서는 ethyl에 1번을 줍니다.", "skill": "고리 번호 동률과 알파벳순"});
+addSpec({"id": "cyclobutene", "cat": "cycloalkene", "ans": ["cyclobutene", "cyclobut-1-ene"], "shape": "ring", "n": 4, "bonds": [[1, 2]], "branches": [], "explanation": "탄소 4개의 고리에 이중 결합 하나가 있습니다. 치환기가 없는 단일 이중 결합 고리이므로 위치 번호를 생략하여 cyclobutene으로 씁니다.", "skill": "고리 이중 결합"});
+addSpec({"id": "3-methylcyclopent-1-ene", "cat": "cycloalkene", "ans": ["3-methylcyclopent-1-ene", "3-methylcyclopentene"], "shape": "ring", "n": 5, "bonds": [[1, 2]], "branches": [[3, 1]], "explanation": "이중 결합의 두 탄소가 1번과 2번이 되도록 고리 번호를 정합니다. 가능한 두 방향 중 methyl기의 번호가 5보다 작은 3이 되는 방향을 선택합니다.", "skill": "고리 이중 결합과 가지 번호"});
+addSpec({"id": "4-methylcyclohex-1-ene", "cat": "cycloalkene", "ans": ["4-methylcyclohex-1-ene", "4-methylcyclohexene"], "shape": "ring", "n": 6, "bonds": [[1, 2]], "branches": [[4, 1]], "explanation": "이중 결합을 1번과 2번 탄소 사이에 둡니다. 그 조건에서 methyl기의 위치 번호 후보 4와 5 중 더 작은 4를 선택합니다.", "skill": "불포화 고리 최저 번호"});
+addSpec({"id": "cyclohexa-1,3-diene", "cat": "cycloalkene", "ans": ["cyclohexa-1,3-diene", "1,3-cyclohexadiene"], "shape": "ring", "n": 6, "bonds": [[1, 2], [3, 2]], "branches": [], "explanation": "탄소 6개의 고리에 이중 결합이 두 개 있습니다. 이중 결합 시작 번호의 집합이 가장 낮은 1,3이 되도록 정하고 -diene을 사용합니다.", "skill": "고리 다이엔"});
+addSpec({"id": "propylbenzene", "cat": "aromatic", "ans": ["propylbenzene", "n-propylbenzene"], "shape": "ring", "n": 6, "bonds": [[1, 2], [3, 2], [5, 2]], "branches": [[1, 3]], "explanation": "benzene 고리에 탄소 3개의 곧은 가지가 붙어 있으므로 치환기는 propyl입니다. 단일 치환 benzene에서는 위치 번호를 생략합니다.", "skill": "방향족 프로필 치환기"});
+addSpec({"id": "1,2-dimethylbenzene", "cat": "aromatic", "ans": ["1,2-dimethylbenzene", "o-xylene", "ortho-xylene"], "shape": "ring", "n": 6, "bonds": [[1, 2], [3, 2], [5, 2]], "branches": [[1, 1], [2, 1]], "explanation": "benzene 고리의 이웃한 두 위치에 methyl기가 있습니다. 위치를 1,2로 표시하며 관용명은 o-xylene입니다.", "skill": "오르토 치환 위치"});
+addSpec({"id": "1,3-dimethylbenzene", "cat": "aromatic", "ans": ["1,3-dimethylbenzene", "m-xylene", "meta-xylene"], "shape": "ring", "n": 6, "bonds": [[1, 2], [3, 2], [5, 2]], "branches": [[1, 1], [3, 1]], "explanation": "benzene 고리에서 methyl기 사이에 탄소 하나가 있습니다. 최저 위치 번호는 1,3이며 관용명은 m-xylene입니다.", "skill": "메타 치환 위치"});
+addSpec({"id": "1-ethyl-2-methylbenzene", "cat": "aromatic", "ans": ["1-ethyl-2-methylbenzene", "2-ethyltoluene", "o-ethyltoluene"], "shape": "ring", "n": 6, "bonds": [[1, 2], [3, 2], [5, 2]], "branches": [[1, 2], [2, 1]], "explanation": "benzene 고리의 이웃한 위치에 ethyl과 methyl이 있습니다. 최저 번호 집합 1,2가 동률이므로 알파벳순으로 앞서는 ethyl에 1번을 줍니다.", "skill": "방향족 번호 동률"});
+addSpec({"id": "1-ethyl-3-methylbenzene", "cat": "aromatic", "ans": ["1-ethyl-3-methylbenzene", "3-ethyltoluene", "m-ethyltoluene"], "shape": "ring", "n": 6, "bonds": [[1, 2], [3, 2], [5, 2]], "branches": [[1, 2], [3, 1]], "explanation": "benzene 고리의 두 치환기에 최저 위치 번호 1,3을 부여합니다. 같은 번호 집합에서는 알파벳순으로 앞서는 ethyl에 1번을 줍니다.", "skill": "방향족 치환기 알파벳순"});
+addSpec({"id": "1,3,5-trimethylbenzene", "cat": "aromatic", "ans": ["1,3,5-trimethylbenzene", "mesitylene"], "shape": "ring", "n": 6, "bonds": [[1, 2], [3, 2], [5, 2]], "branches": [[1, 1], [3, 1], [5, 1]], "explanation": "benzene 고리의 한 칸씩 건너뛴 위치에 methyl기가 세 개 있습니다. 최저 위치 번호 집합 1,3,5와 접두사 trimethyl을 사용합니다.", "skill": "삼치환 방향족"});
+
+
+/* ===================== 확장 문제 세트 (실존 화합물 중심, 100문제 추가분) ===================== */
+addSpec({"id": "undecane", "cat": "alkane", "n": 11, "explanation": "가지 없이 이어진 탄소 11개의 사슬입니다. 등유(케로신)에 포함된 실제 탄화수소 성분 중 하나입니다.", "groups": [], "branches": [], "shape": "chain", "ans": ["undecane"]});
+addSpec({"id": "dodecane", "cat": "alkane", "n": 12, "explanation": "가지 없이 이어진 탄소 12개의 사슬입니다. 디젤 연료와 등유에 실제로 포함되는 성분입니다.", "groups": [], "branches": [], "shape": "chain", "ans": ["dodecane"]});
+addSpec({"id": "4-methylheptane", "cat": "alkane", "n": 7, "explanation": "최장 사슬은 탄소 7개의 heptane입니다. 사슬 중앙인 4번 탄소에 methyl기가 있어 양쪽에서 세어도 번호가 같습니다.", "groups": [], "branches": [[4, 1]], "shape": "chain", "ans": ["4-methylheptane"]});
+addSpec({"id": "2,3-dimethylhexane", "cat": "alkane", "n": 6, "explanation": "최장 사슬은 hexane이며 서로 이웃한 2번과 3번 탄소에 methyl기가 있습니다. 최저 위치 번호 집합은 2,3입니다.", "groups": [], "branches": [[2, 1], [3, 1]], "shape": "chain", "ans": ["2,3-dimethylhexane"]});
+addSpec({"id": "2,5-dimethylhexane", "cat": "alkane", "n": 6, "explanation": "최장 사슬은 hexane이며 양쪽 끝에서 두 번째 탄소마다 methyl기가 있습니다. 실제로 석유에서 발견되는 이성질체입니다.", "groups": [], "branches": [[2, 1], [5, 1]], "shape": "chain", "ans": ["2,5-dimethylhexane"]});
+addSpec({"id": "2,2-dimethylhexane", "cat": "alkane", "n": 6, "explanation": "최장 사슬은 hexane이고 같은 탄소(2번)에 methyl기 두 개가 붙어 있습니다.", "groups": [], "branches": [[2, 1], [2, 1]], "shape": "chain", "ans": ["2,2-dimethylhexane"]});
+addSpec({"id": "3-methyloctane", "cat": "alkane", "n": 8, "explanation": "최장 사슬은 탄소 8개의 octane이며 3번 탄소에 methyl기가 있습니다.", "groups": [], "branches": [[3, 1]], "shape": "chain", "ans": ["3-methyloctane"]});
+addSpec({"id": "4-methyloctane", "cat": "alkane", "n": 8, "explanation": "최장 사슬은 octane이며 methyl기의 위치 번호는 양쪽에서 세어도 4와 5 중 더 작은 4입니다.", "groups": [], "branches": [[4, 1]], "shape": "chain", "ans": ["4-methyloctane"]});
+addSpec({"id": "2,6-dimethylheptane", "cat": "alkane", "n": 7, "explanation": "최장 사슬은 탄소 7개의 heptane이며 2번과 6번 탄소에 methyl기가 하나씩 붙어 있습니다.", "groups": [], "branches": [[2, 1], [6, 1]], "shape": "chain", "ans": ["2,6-dimethylheptane"]});
+addSpec({"id": "2,6-dimethyloctane", "cat": "alkane", "n": 8, "explanation": "최장 사슬은 octane이며 2번과 6번 탄소에 methyl기가 있습니다. 천연가스 응축액에서 실제로 발견되는 성분입니다.", "groups": [], "branches": [[2, 1], [6, 1]], "shape": "chain", "ans": ["2,6-dimethyloctane"]});
+addSpec({"id": "hept-1-ene", "cat": "alkene", "n": 7, "explanation": "탄소 7개의 사슬 끝에 이중 결합이 있습니다. 폴리올레핀 공중합체 제조에 실제로 쓰이는 원료입니다.", "groups": [], "branches": [], "shape": "chain", "ans": ["hept-1-ene", "1-heptene"], "bonds": [[1, 2]]});
+addSpec({"id": "oct-1-ene", "cat": "alkene", "n": 8, "explanation": "탄소 8개의 사슬 끝에 이중 결합이 있습니다. 선형저밀도폴리에틸렌(LLDPE) 생산에 실제로 사용되는 공단량체입니다.", "groups": [], "branches": [], "shape": "chain", "ans": ["oct-1-ene", "1-octene"], "bonds": [[1, 2]]});
+addSpec({"id": "dec-1-ene", "cat": "alkene", "n": 10, "explanation": "탄소 10개의 사슬 끝에 이중 결합이 있습니다. 계면활성제와 윤활유 제조의 원료로 실제 사용됩니다.", "groups": [], "branches": [], "shape": "chain", "ans": ["dec-1-ene", "1-decene"], "bonds": [[1, 2]]});
+addSpec({"id": "hept-2-ene", "cat": "alkene", "n": 7, "explanation": "탄소 7개의 사슬에서 이중 결합의 위치 번호 후보는 2와 5입니다. 더 작은 2를 선택합니다.", "groups": [], "branches": [], "shape": "chain", "ans": ["hept-2-ene", "2-heptene"], "bonds": [[2, 2]]});
+addSpec({"id": "oct-2-ene", "cat": "alkene", "n": 8, "explanation": "탄소 8개의 사슬에서 이중 결합에 더 낮은 번호 2를 부여합니다.", "groups": [], "branches": [], "shape": "chain", "ans": ["oct-2-ene", "2-octene"], "bonds": [[2, 2]]});
+addSpec({"id": "2,3-dimethylbut-2-ene", "cat": "alkene", "n": 4, "explanation": "탄소 4개의 사슬 가운데 이중 결합이 있고, 이중 결합을 이루는 두 탄소에 각각 methyl기가 붙어 있습니다. 오존 분해 연구에 자주 쓰이는 실존 화합물입니다.", "groups": [], "branches": [[2, 1], [3, 1]], "shape": "chain", "ans": ["2,3-dimethylbut-2-ene", "2,3-dimethyl-2-butene", "tetramethylethylene"], "bonds": [[2, 2]]});
+addSpec({"id": "2-methylhex-1-ene", "cat": "alkene", "n": 6, "explanation": "이중 결합을 포함하는 탄소 6개의 사슬에서 이중 결합은 1번이고 methyl기는 2번에 있습니다.", "groups": [], "branches": [[2, 1]], "shape": "chain", "ans": ["2-methylhex-1-ene", "2-methyl-1-hexene"], "bonds": [[1, 2]]});
+addSpec({"id": "5-methylhex-1-ene", "cat": "alkene", "n": 6, "explanation": "탄소 6개의 사슬에서 이중 결합에 낮은 번호 1을 우선 부여하면 methyl기의 위치는 5번이 됩니다.", "groups": [], "branches": [[5, 1]], "shape": "chain", "ans": ["5-methylhex-1-ene", "5-methyl-1-hexene"], "bonds": [[1, 2]]});
+addSpec({"id": "hexa-1,3-diene", "cat": "alkene", "n": 6, "explanation": "탄소 6개의 사슬에 이중 결합이 두 개 있습니다. 위치 번호 후보 1,3과 3,5 중 더 작은 1,3을 선택합니다.", "groups": [], "branches": [], "shape": "chain", "ans": ["hexa-1,3-diene", "1,3-hexadiene"], "bonds": [[1, 2], [3, 2]]});
+addSpec({"id": "octa-1,7-diene", "cat": "alkene", "n": 8, "explanation": "탄소 8개의 사슬 양 끝에 이중 결합이 하나씩 있습니다. 고분자 가교제로 실제 사용되는 화합물입니다.", "groups": [], "branches": [], "shape": "chain", "ans": ["octa-1,7-diene", "1,7-octadiene"], "bonds": [[1, 2], [7, 2]]});
+addSpec({"id": "hept-1-yne", "cat": "alkyne", "n": 7, "explanation": "탄소 7개의 사슬 끝에 삼중 결합이 있습니다.", "groups": [], "branches": [], "shape": "chain", "ans": ["hept-1-yne", "1-heptyne"], "bonds": [[1, 3]]});
+addSpec({"id": "oct-1-yne", "cat": "alkyne", "n": 8, "explanation": "탄소 8개의 사슬 끝에 삼중 결합이 있습니다. 향료 합성의 중간체로 실제 사용됩니다.", "groups": [], "branches": [], "shape": "chain", "ans": ["oct-1-yne", "1-octyne"], "bonds": [[1, 3]]});
+addSpec({"id": "hept-2-yne", "cat": "alkyne", "n": 7, "explanation": "탄소 7개의 사슬에서 삼중 결합의 위치 번호는 2와 5 중 더 작은 2입니다.", "groups": [], "branches": [], "shape": "chain", "ans": ["hept-2-yne", "2-heptyne"], "bonds": [[2, 3]]});
+addSpec({"id": "4-methylhex-1-yne", "cat": "alkyne", "n": 6, "explanation": "삼중 결합에 낮은 번호 1을 우선 부여하는 탄소 6개의 사슬에서 methyl기는 4번입니다.", "groups": [], "branches": [[4, 1]], "shape": "chain", "ans": ["4-methylhex-1-yne", "4-methyl-1-hexyne"], "bonds": [[1, 3]]});
+addSpec({"id": "3,3-dimethylbut-1-yne", "cat": "alkyne", "n": 4, "explanation": "탄소 4개의 사슬 끝에 삼중 결합이 있고, 3번 탄소에 methyl기 두 개가 붙어 있습니다. tert-부틸아세틸렌이라는 이름으로도 불리는 실존 시약입니다.", "groups": [], "branches": [[3, 1], [3, 1]], "shape": "chain", "ans": ["3,3-dimethylbut-1-yne", "3,3-dimethyl-1-butyne", "tert-butylacetylene"], "bonds": [[1, 3]]});
+addSpec({"id": "dec-1-yne", "cat": "alkyne", "n": 10, "explanation": "탄소 10개의 사슬 끝에 삼중 결합이 있습니다. 유기 합성의 출발 물질로 실제 사용됩니다.", "groups": [], "branches": [], "shape": "chain", "ans": ["dec-1-yne", "1-decyne"], "bonds": [[1, 3]]});
+addSpec({"id": "cyclononane", "cat": "cycloalkane", "n": 9, "explanation": "단일 결합으로 이루어진 탄소 9개의 고리입니다.", "groups": [], "branches": [], "shape": "ring", "ans": ["cyclononane"]});
+addSpec({"id": "cyclodecane", "cat": "cycloalkane", "n": 10, "explanation": "단일 결합으로 이루어진 탄소 10개의 고리입니다. 머스크 계열 향료 합성의 원료로 실제 쓰입니다.", "groups": [], "branches": [], "shape": "ring", "ans": ["cyclodecane"]});
+addSpec({"id": "propylcyclohexane", "cat": "cycloalkane", "n": 6, "explanation": "탄소 6개의 고리가 곁사슬(탄소 3개)보다 크므로 고리를 부모로 삼습니다. 석유와 제트연료에 실제로 포함된 성분입니다.", "groups": [], "branches": [[1, 3]], "shape": "ring", "ans": ["propylcyclohexane"]});
+addSpec({"id": "ethylcyclohexane", "cat": "cycloalkane", "n": 6, "explanation": "cyclohexane 고리에 탄소 2개의 ethyl기가 붙어 있습니다. 용매로 실제 사용되는 화합물입니다.", "groups": [], "branches": [[1, 2]], "shape": "ring", "ans": ["ethylcyclohexane"]});
+addSpec({"id": "1,1-dimethylcyclohexane", "cat": "cycloalkane", "n": 6, "explanation": "cyclohexane 고리의 같은 탄소에 methyl기 두 개가 붙어 있습니다.", "groups": [], "branches": [[1, 1], [1, 1]], "shape": "ring", "ans": ["1,1-dimethylcyclohexane"]});
+addSpec({"id": "1,4-dimethylcyclohexane", "cat": "cycloalkane", "n": 6, "explanation": "cyclohexane 고리에서 서로 마주 보는 1,4번 위치에 methyl기가 있습니다.", "groups": [], "branches": [[1, 1], [4, 1]], "shape": "ring", "ans": ["1,4-dimethylcyclohexane"]});
+addSpec({"id": "1,3-dimethylcyclohexane", "cat": "cycloalkane", "n": 6, "explanation": "cyclohexane 고리에서 methyl기 사이에 탄소 하나가 있는 1,3 위치 관계입니다.", "groups": [], "branches": [[1, 1], [3, 1]], "shape": "ring", "ans": ["1,3-dimethylcyclohexane"]});
+addSpec({"id": "butylcyclopentane", "cat": "cycloalkane", "n": 5, "explanation": "탄소 5개의 고리가 곁사슬(탄소 4개)보다 크므로 고리를 부모로 삼습니다. 석유에서 실제로 발견되는 성분입니다.", "groups": [], "branches": [[1, 4]], "shape": "ring", "ans": ["butylcyclopentane"]});
+addSpec({"id": "cycloheptene", "cat": "cycloalkene", "n": 7, "explanation": "탄소 7개의 고리에 이중 결합이 하나 있습니다.", "groups": [], "branches": [], "shape": "ring", "ans": ["cycloheptene", "cyclohept-1-ene"], "bonds": [[1, 2]]});
+addSpec({"id": "cyclooctene", "cat": "cycloalkene", "n": 8, "explanation": "탄소 8개의 고리에 이중 결합이 하나 있습니다. 개환 복분해 중합(ROMP)의 단량체로 실제 쓰입니다.", "groups": [], "branches": [], "shape": "ring", "ans": ["cyclooctene", "cyclooct-1-ene"], "bonds": [[1, 2]]});
+addSpec({"id": "cyclohepta-1,3-diene", "cat": "cycloalkene", "n": 7, "explanation": "탄소 7개의 고리에 이중 결합이 두 개 있습니다. 위치 번호 집합이 가장 낮은 1,3을 사용합니다.", "groups": [], "branches": [], "shape": "ring", "ans": ["cyclohepta-1,3-diene", "1,3-cycloheptadiene"], "bonds": [[1, 2], [3, 2]]});
+addSpec({"id": "cycloocta-1,5-diene", "cat": "cycloalkene", "n": 8, "explanation": "탄소 8개의 고리에 이중 결합이 두 개 있습니다. 1,5-cyclooctadiene(COD)은 유기금속 촉매의 리간드로 실제 널리 쓰입니다.", "groups": [], "branches": [], "shape": "ring", "ans": ["cycloocta-1,5-diene", "1,5-cyclooctadiene", "cod"], "bonds": [[1, 2], [5, 2]]});
+addSpec({"id": "4,4-dimethylcyclohex-1-ene", "cat": "cycloalkene", "n": 6, "explanation": "이중 결합을 1,2번 탄소 사이에 두면 methyl기 두 개는 같은 탄소인 4번에 위치합니다.", "groups": [], "branches": [[4, 1], [4, 1]], "shape": "ring", "ans": ["4,4-dimethylcyclohex-1-ene", "4,4-dimethylcyclohexene"], "bonds": [[1, 2]]});
+addSpec({"id": "cyclononyne", "cat": "cycloalkyne", "n": 9, "explanation": "탄소 9개의 고리 안에 삼중 결합이 하나 있습니다. 고리 뒤틀림이 커서 반응성이 높은 실존 화합물입니다.", "groups": [], "branches": [], "shape": "ring", "ans": ["cyclononyne"], "bonds": [[1, 3]]});
+addSpec({"id": "cyclodecyne", "cat": "cycloalkyne", "n": 10, "explanation": "탄소 10개의 고리 안에 삼중 결합이 하나 있습니다. 고리 골격은 단순화해 그렸습니다.", "groups": [], "branches": [], "shape": "ring", "ans": ["cyclodecyne"], "bonds": [[1, 3]]});
+addSpec({"id": "nitrobenzene", "cat": "aromatic", "n": 6, "explanation": "벤젠고리에 나이트로기(NO₂)가 직접 붙은 구조입니다. 과거 구두약 향료 등에 실제 쓰였던 화합물입니다.", "groups": [[1, "NO₂", 1]], "branches": [], "shape": "ring", "ans": ["nitrobenzene"], "bonds": [[1, 2], [3, 2], [5, 2]]});
+addSpec({"id": "chlorobenzene", "cat": "aromatic", "n": 6, "explanation": "벤젠고리에 염소(Cl)가 직접 붙은 구조입니다. 여러 유기 합성의 용매·원료로 실제 사용됩니다.", "groups": [[1, "Cl", 1]], "branches": [], "shape": "ring", "ans": ["chlorobenzene"], "bonds": [[1, 2], [3, 2], [5, 2]]});
+addSpec({"id": "bromobenzene", "cat": "aromatic", "n": 6, "explanation": "벤젠고리에 브로민(Br)이 직접 붙은 구조입니다. 그리냐르 시약 제조에 실제로 쓰이는 시약입니다.", "groups": [[1, "Br", 1]], "branches": [], "shape": "ring", "ans": ["bromobenzene"], "bonds": [[1, 2], [3, 2], [5, 2]]});
+addSpec({"id": "4-chlorotoluene", "cat": "aromatic", "n": 6, "explanation": "벤젠고리의 1번에 methyl기, 4번(파라 위치)에 Cl이 있습니다.", "groups": [[4, "Cl", 1]], "branches": [[1, 1]], "shape": "ring", "ans": ["4-chlorotoluene", "1-chloro-4-methylbenzene", "p-chlorotoluene"], "bonds": [[1, 2], [3, 2], [5, 2]]});
+addSpec({"id": "4-nitrotoluene", "cat": "aromatic", "n": 6, "explanation": "벤젠고리의 1번에 methyl기, 4번(파라 위치)에 나이트로기가 있습니다.", "groups": [[4, "NO₂", 1]], "branches": [[1, 1]], "shape": "ring", "ans": ["4-nitrotoluene", "1-methyl-4-nitrobenzene", "p-nitrotoluene"], "bonds": [[1, 2], [3, 2], [5, 2]]});
+addSpec({"id": "methanol", "cat": "alcohol", "n": 1, "explanation": "탄소 1개에 OH가 붙은 가장 간단한 알코올입니다.", "groups": [[1, "OH", 1]], "branches": [], "shape": "chain", "ans": ["methanol", "methyl alcohol"]});
+addSpec({"id": "1-hexanol", "cat": "alcohol", "n": 6, "explanation": "탄소 6개 사슬의 끝(1번)에 OH가 있습니다.", "groups": [[1, "OH", 1]], "branches": [], "shape": "chain", "ans": ["1-hexanol", "hexan-1-ol"]});
+addSpec({"id": "1-octanol", "cat": "alcohol", "n": 8, "explanation": "탄소 8개 사슬의 끝에 OH가 있습니다. 향수와 화장품 원료로 실제 사용됩니다.", "groups": [[1, "OH", 1]], "branches": [], "shape": "chain", "ans": ["1-octanol", "octan-1-ol"]});
+addSpec({"id": "cyclopentanol", "cat": "alcohol", "n": 5, "explanation": "탄소 5개의 고리에 OH가 직접 붙어 있습니다.", "groups": [[1, "OH", 1]], "branches": [], "shape": "ring", "ans": ["cyclopentanol"]});
+addSpec({"id": "2-methylpropan-1-ol", "cat": "alcohol", "n": 3, "explanation": "OH가 있는 3탄소 주사슬의 2번에 methyl기가 있습니다. 바이오연료 첨가제로 실제 사용되는 아이소뷰탄올입니다.", "groups": [[1, "OH", 1]], "branches": [[2, 1]], "shape": "chain", "ans": ["2-methylpropan-1-ol", "isobutanol", "isobutyl alcohol"]});
+addSpec({"id": "3-methylbutan-1-ol", "cat": "alcohol", "n": 4, "explanation": "OH가 있는 4탄소 주사슬의 3번에 methyl기가 있습니다. 아이소아밀 아세테이트(바나나향) 합성의 원료가 되는 실존 화합물입니다.", "groups": [[1, "OH", 1]], "branches": [[3, 1]], "shape": "chain", "ans": ["3-methylbutan-1-ol", "isoamyl alcohol", "isopentyl alcohol"]});
+addSpec({"id": "2-methylbutan-2-ol", "cat": "alcohol", "n": 4, "explanation": "OH와 methyl기가 모두 2번 탄소에 있는 3차 알코올입니다.", "groups": [[2, "OH", 1]], "branches": [[2, 1]], "shape": "chain", "ans": ["2-methylbutan-2-ol", "tert-amyl alcohol", "tert-pentyl alcohol"]});
+addSpec({"id": "propane-1,2,3-triol", "cat": "alcohol", "n": 3, "explanation": "탄소 3개 모두에 OH가 하나씩 붙어 있는 삼가 알코올입니다. 비누와 화장품에 실제로 쓰이는 글리세롤입니다.", "groups": [[1, "OH", 1], [2, "OH", 1], [3, "OH", 1]], "branches": [], "shape": "chain", "ans": ["propane-1,2,3-triol", "glycerol", "glycerin"]});
+addSpec({"id": "methanal", "cat": "aldehyde", "n": 1, "explanation": "탄소 1개에 산소가 이중 결합한 가장 간단한 알데하이드입니다. 소독·방부용으로 실제 널리 쓰였던 폼알데하이드입니다.", "groups": [[1, "O", 2]], "branches": [], "shape": "chain", "ans": ["methanal", "formaldehyde"]});
+addSpec({"id": "hexanal", "cat": "aldehyde", "n": 6, "explanation": "탄소 6개 사슬의 말단 탄소가 CHO인 알데하이드입니다. 풀 냄새를 내는 향미 성분으로 실제 존재합니다.", "groups": [[1, "O", 2]], "branches": [], "shape": "chain", "ans": ["hexanal"]});
+addSpec({"id": "octanal", "cat": "aldehyde", "n": 8, "explanation": "탄소 8개 사슬의 말단이 CHO입니다. 감귤류 향기 성분으로 실제 쓰입니다.", "groups": [[1, "O", 2]], "branches": [], "shape": "chain", "ans": ["octanal"]});
+addSpec({"id": "2-methylbutanal", "cat": "aldehyde", "n": 4, "explanation": "CHO 탄소를 1번으로 세는 4탄소 사슬의 2번에 methyl기가 있습니다. 초콜릿 향미 성분으로 실제 존재합니다.", "groups": [[1, "O", 2]], "branches": [[2, 1]], "shape": "chain", "ans": ["2-methylbutanal"]});
+addSpec({"id": "hexan-2-one", "cat": "ketone", "n": 6, "explanation": "카보닐기를 포함하는 6탄소 사슬에서 C=O에 낮은 번호 2를 부여합니다.", "groups": [[2, "O", 2]], "branches": [], "shape": "chain", "ans": ["hexan-2-one", "2-hexanone"]});
+addSpec({"id": "heptan-2-one", "cat": "ketone", "n": 7, "explanation": "7탄소 사슬에서 C=O가 2번 위치에 있습니다. 블루치즈 향의 성분으로 실제 존재합니다.", "groups": [[2, "O", 2]], "branches": [], "shape": "chain", "ans": ["heptan-2-one", "2-heptanone"]});
+addSpec({"id": "cycloheptanone", "cat": "ketone", "n": 7, "explanation": "탄소 7개의 고리 자체에 C=O가 포함된 케톤입니다.", "groups": [[1, "O", 2]], "branches": [], "shape": "ring", "ans": ["cycloheptanone"]});
+addSpec({"id": "3-methylbutan-2-one", "cat": "ketone", "n": 4, "explanation": "C=O가 2번에 있는 4탄소 사슬에서 3번에 methyl기가 있습니다. 실제 산업 용매로 쓰이는 메틸아이소프로필케톤입니다.", "groups": [[2, "O", 2]], "branches": [[3, 1]], "shape": "chain", "ans": ["3-methylbutan-2-one", "methyl isopropyl ketone"]});
+addSpec({"id": "methanoic acid", "cat": "acid", "n": 1, "explanation": "탄소 1개에 카복실기가 붙은 가장 간단한 카복실산입니다. 개미의 독 성분으로 유명한 폼산(개미산)입니다.", "groups": [[1, "O", 2], [1, "OH", 1]], "branches": [], "shape": "chain", "ans": ["methanoic acid", "formic acid"]});
+addSpec({"id": "hexanoic acid", "cat": "acid", "n": 6, "explanation": "탄소 6개의 카복실산입니다. 염소 특유의 냄새를 내는 성분으로 실제 존재하는 카프로산입니다.", "groups": [[1, "O", 2], [1, "OH", 1]], "branches": [], "shape": "chain", "ans": ["hexanoic acid", "caproic acid"]});
+addSpec({"id": "octanoic acid", "cat": "acid", "n": 8, "explanation": "탄소 8개의 카복실산입니다. 코코넛 오일에 실제로 포함된 카프릴산입니다.", "groups": [[1, "O", 2], [1, "OH", 1]], "branches": [], "shape": "chain", "ans": ["octanoic acid", "caprylic acid"]});
+addSpec({"id": "decanoic acid", "cat": "acid", "n": 10, "explanation": "탄소 10개의 카복실산입니다. 야자유·코코넛 오일에 실제로 포함된 카프르산입니다.", "groups": [[1, "O", 2], [1, "OH", 1]], "branches": [], "shape": "chain", "ans": ["decanoic acid", "capric acid"]});
+addSpec({"id": "2-hydroxypropanoic acid", "cat": "acid", "n": 3, "explanation": "COOH의 탄소를 1번으로 하는 3탄소 사슬의 2번에 OH가 더 있습니다. 근육 운동이나 요구르트 발효로 잘 알려진 젖산입니다.", "groups": [[1, "O", 2], [1, "OH", 1], [2, "OH", 1]], "branches": [], "shape": "chain", "ans": ["2-hydroxypropanoic acid", "lactic acid"]});
+addSpec({"id": "2-oxopropanoic acid", "cat": "acid", "n": 3, "explanation": "COOH의 탄소를 1번으로 하는 3탄소 사슬의 2번에 케톤성 C=O가 더 있습니다. 세포 호흡 과정에 등장하는 실존 화합물 피루브산입니다.", "groups": [[1, "O", 2], [1, "OH", 1], [2, "O", 2]], "branches": [], "shape": "chain", "ans": ["2-oxopropanoic acid", "pyruvic acid"]});
+addSpec({"id": "ethanedioic acid", "cat": "acid", "n": 2, "explanation": "탄소 2개 양쪽 모두에 카복실기가 있는 이염기산입니다. 시금치·대황에 실제로 들어 있는 옥살산입니다.", "groups": [[1, "O", 2], [1, "OH", 1], [2, "O", 2], [2, "OH", 1]], "branches": [], "shape": "chain", "ans": ["ethanedioic acid", "oxalic acid"]});
+addSpec({"id": "propan-1-amine", "cat": "amine", "n": 3, "explanation": "3탄소 사슬의 끝(1번)에 NH₂가 붙은 1차 아민입니다.", "groups": [[1, "NH₂", 1]], "branches": [], "shape": "chain", "ans": ["propan-1-amine", "1-propanamine", "propylamine"]});
+addSpec({"id": "butan-1-amine", "cat": "amine", "n": 4, "explanation": "4탄소 사슬의 끝에 NH₂가 붙은 1차 아민입니다.", "groups": [[1, "NH₂", 1]], "branches": [], "shape": "chain", "ans": ["butan-1-amine", "1-butanamine", "butylamine"]});
+addSpec({"id": "pentane-1,5-diamine", "cat": "amine", "n": 5, "explanation": "탄소 5개 사슬의 양 끝에 NH₂가 하나씩 있는 이아민입니다. 부패한 단백질에서 나는 냄새의 원인인 실존 화합물 카데버린입니다.", "groups": [[1, "NH₂", 1], [5, "NH₂", 1]], "branches": [], "shape": "chain", "ans": ["pentane-1,5-diamine", "1,5-pentanediamine", "cadaverine"]});
+addSpec({"id": "butane-1,4-diamine", "cat": "amine", "n": 4, "explanation": "탄소 4개 사슬의 양 끝에 NH₂가 있는 이아민입니다. 부패 시 발생하는 실존 화합물 푸트레신입니다.", "groups": [[1, "NH₂", 1], [4, "NH₂", 1]], "branches": [], "shape": "chain", "ans": ["butane-1,4-diamine", "1,4-butanediamine", "putrescine"]});
+addSpec({"id": "aniline", "cat": "amine", "n": 6, "explanation": "벤젠고리에 NH₂가 직접 붙은 구조입니다. aniline 또는 benzenamine으로 부릅니다.", "groups": [[1, "NH₂", 1]], "branches": [], "shape": "ring", "ans": ["aniline"] , "bonds": [[1, 2], [3, 2], [5, 2]]});
+addSpec({"id": "benzene-1,2-diol", "cat": "phenol", "n": 6, "explanation": "벤젠고리의 서로 이웃한 1,2번 위치에 OH가 하나씩 있습니다. 실제 존재하는 화합물 카테콜입니다.", "groups": [[1, "OH", 1], [2, "OH", 1]], "branches": [], "shape": "ring", "ans": ["benzene-1,2-diol", "1,2-dihydroxybenzene", "catechol"], "bonds": [[1, 2], [3, 2], [5, 2]]});
+addSpec({"id": "benzene-1,3-diol", "cat": "phenol", "n": 6, "explanation": "벤젠고리의 1,3번 위치에 OH가 하나씩 있습니다. 실제 존재하는 화합물 레조르시놀입니다.", "groups": [[1, "OH", 1], [3, "OH", 1]], "branches": [], "shape": "ring", "ans": ["benzene-1,3-diol", "1,3-dihydroxybenzene", "resorcinol"], "bonds": [[1, 2], [3, 2], [5, 2]]});
+addSpec({"id": "benzene-1,4-diol", "cat": "phenol", "n": 6, "explanation": "벤젠고리의 서로 마주 보는 1,4번 위치에 OH가 있습니다. 사진 현상액 성분으로 유명한 하이드로퀴논입니다.", "groups": [[1, "OH", 1], [4, "OH", 1]], "branches": [], "shape": "ring", "ans": ["benzene-1,4-diol", "1,4-dihydroxybenzene", "hydroquinone"], "bonds": [[1, 2], [3, 2], [5, 2]]});
+addSpec({"id": "4-ethylphenol", "cat": "phenol", "n": 6, "explanation": "OH가 붙은 탄소를 1번으로 하면 ethyl기는 4번(파라 위치)입니다. 와인의 이취 성분으로 실제 알려진 화합물입니다.", "groups": [[1, "OH", 1]], "branches": [[4, 2]], "shape": "ring", "ans": ["4-ethylphenol"]});
+
+/* ---- 추가 에터 (실존 화합물) ---- */
+addEther('1-propoxypropane',3,1,3,'긴 3탄소 사슬을 propane으로 삼고, 반대쪽도 3탄소이므로 propoxy기가 붙습니다. 다이프로필 에터라는 이름으로도 불리는 실존 용매입니다.',['dipropyl ether']);
+addEther('1-butoxybutane',4,1,4,'양쪽 모두 4탄소 사슬인 대칭 에터입니다. 다이뷰틸 에터라는 이름의 실존 용매입니다.',['dibutyl ether']);
+addEther('1-methoxybutane',4,1,1,'긴 4탄소 사슬을 butane으로, 짧은 쪽인 OCH₃를 methoxy기로 부릅니다.',['butyl methyl ether']);
+addEther('2-methoxybutane',4,2,1,'4탄소 주사슬의 2번에 methoxy기가 붙어 있습니다.',['sec-butyl methyl ether']);
+addEther('1-ethoxybutane',4,1,2,'4탄소 사슬의 1번에 OC₂H₅, 즉 ethoxy기가 붙어 있습니다.',['butyl ethyl ether']);
+
+/* ---- 추가 에스터 (과일향 실존 화합물) ---- */
+addEster('methyl butanoate',4,1,'산소 쪽 알킬기는 methyl이고, 카보닐 탄소를 포함한 산 부분은 4탄소 butanoate입니다. 파인애플 향의 실존 향료 성분입니다.',['methyl butyrate']);
+addEster('ethyl butanoate',4,2,'산소 쪽 2탄소 ethyl과 4탄소 산 부분 butanoate가 결합했습니다. 파인애플·딸기 향의 실존 향료 성분입니다.',['ethyl butyrate']);
+addEster('butyl acetate',2,4,'산소 쪽 4탄소 알킬기는 butyl이고, 산 부분은 2탄소 ethanoate(아세트산)입니다. 바나나 향이 나는 실존 용매·향료 성분입니다.',['butyl ethanoate']);
+addEster('ethyl hexanoate',6,2,'산소 쪽 ethyl과 6탄소 산 부분 hexanoate가 결합했습니다. 파인애플·사과 향의 실존 향료 성분입니다.',['ethyl caproate']);
+addEster('ethyl pentanoate',5,2,'산소 쪽 ethyl과 5탄소 산 부분 pentanoate가 결합했습니다. 사과 향의 실존 향료 성분입니다.',['ethyl valerate']);
+
+/* ---- 방향족 유도체 (직접 작성, 실존 화합물) ---- */
+addMol('styrene','aromatic',['styrene','vinylbenzene','ethenylbenzene'], m=>{
+  const idxs=ring(m,120,150,52,6);
+  for(let i=0;i<6;i+=2) m.e[i][2]=2;
+  const r1=ringBranch(m,idxs,0,6);
+  const b2=addFrom(m,r1.idx, r1.ang-60); bond(m,r1.idx,b2,2);
+});
+MOLS[MOLS.length-1].explanation='벤젠고리에 이중 결합을 포함한 2탄소 곁사슬(비닐기)이 붙어 있습니다. 폴리스타이렌의 원료로 실제 대량 생산되는 스타이렌입니다.';
+
+addMol('cumene','aromatic',['cumene','isopropylbenzene','(1-methylethyl)benzene'], m=>{
+  const idxs=ring(m,120,150,52,6);
+  for(let i=0;i<6;i+=2) m.e[i][2]=2;
+  const r1=ringBranch(m,idxs,0,6);
+  const b1=addFrom(m,r1.idx, r1.ang+40); bond(m,r1.idx,b1,1);
+  const b2=addFrom(m,r1.idx, r1.ang-40); bond(m,r1.idx,b2,1);
+});
+MOLS[MOLS.length-1].explanation='벤젠고리에 곁가지가 있는 3탄소기(아이소프로필기)가 붙어 있습니다. 페놀과 아세톤을 만드는 공업 공정(큐멘법)의 원료로 실제 쓰입니다.';
+
+addMol('tert-butylbenzene','aromatic',['tert-butylbenzene','(1,1-dimethylethyl)benzene'], m=>{
+  const idxs=ring(m,120,150,52,6);
+  for(let i=0;i<6;i+=2) m.e[i][2]=2;
+  const r1=ringBranch(m,idxs,0,6);
+  const b1=addFrom(m,r1.idx, r1.ang+90); bond(m,r1.idx,b1,1);
+  const b2=addFrom(m,r1.idx, r1.ang); bond(m,r1.idx,b2,1);
+  const b3=addFrom(m,r1.idx, r1.ang-90); bond(m,r1.idx,b3,1);
+});
+MOLS[MOLS.length-1].explanation='벤젠고리에 메틸기 세 개가 모두 붙은 4차 탄소(tert-뷰틸기)가 연결되어 있습니다.';
+
+addMol('benzyl-alcohol','alcohol',['benzyl alcohol','phenylmethanol'], m=>{
+  const idxs=ring(m,120,150,52,6);
+  for(let i=0;i<6;i+=2) m.e[i][2]=2;
+  const r1=ringBranch(m,idxs,0,6);
+  const oh=addFrom(m,r1.idx, r1.ang-40); bond(m,r1.idx,oh,1); label(m,oh,'OH');
+});
+MOLS[MOLS.length-1].explanation='벤젠고리에 OH가 붙은 탄소(CH₂OH)가 곁사슬로 연결되어 있습니다. OH가 고리에 직접 붙은 phenol과 구분해야 합니다. 화장품 방부제로 실제 사용되는 벤질 알코올입니다.';
+
+addMol('anisole','ether',['anisole','methoxybenzene'], m=>{
+  const idxs=ring(m,120,150,52,6);
+  for(let i=0;i<6;i+=2) m.e[i][2]=2;
+  const r1=ringBranch(m,idxs,0,6); label(m,r1.idx,'O');
+  const me=addFrom(m,r1.idx, r1.ang-40); bond(m,r1.idx,me,1);
+});
+MOLS[MOLS.length-1].explanation='벤젠고리에 산소를 거쳐 methyl기가 연결된 방향족 에터입니다. 아니스(회향) 향이 나는 실존 화합물 아니솔입니다.';
+
+addMol('benzaldehyde','aldehyde',['benzaldehyde','phenylmethanal','benzenecarbaldehyde'], m=>{
+  const idxs=ring(m,120,150,52,6);
+  for(let i=0;i<6;i+=2) m.e[i][2]=2;
+  const r1=ringBranch(m,idxs,0,6);
+  const o=addFrom(m,r1.idx, r1.ang-40); bond(m,r1.idx,o,2); label(m,o,'O');
+});
+MOLS[MOLS.length-1].explanation='벤젠고리에 CHO기가 직접 붙어 있습니다. 아몬드 향이 나는 실존 화합물 벤즈알데하이드입니다.';
+
+addMol('acetophenone','ketone',['acetophenone','1-phenylethan-1-one','phenyl methyl ketone','methyl phenyl ketone'], m=>{
+  const idxs=ring(m,120,150,52,6);
+  for(let i=0;i<6;i+=2) m.e[i][2]=2;
+  const r1=ringBranch(m,idxs,0,6);
+  const o=addFrom(m,r1.idx, r1.ang+40); bond(m,r1.idx,o,2); label(m,o,'O');
+  const me=addFrom(m,r1.idx, r1.ang-40); bond(m,r1.idx,me,1);
+});
+MOLS[MOLS.length-1].explanation='벤젠고리에 카보닐 탄소(C=O)를 거쳐 methyl기가 연결된 방향족 케톤입니다. 은은한 아몬드 향이 나며 향료 산업에 실제 쓰이는 아세토페논입니다.';
+
+
+/* ===================== 카테고리 메타 ===================== */
+const CATS = [
+  {id:'alkane', label:'알케인'},
+  {id:'alkene', label:'알켄'},
+  {id:'alkyne', label:'알카인'},
+  {id:'cycloalkane', label:'사이클로알케인'},
+  {id:'cycloalkene', label:'사이클로알켄'},
+  {id:'cycloalkyne', label:'사이클로알카인'},
+  {id:'aromatic', label:'방향족 탄화수소'},
+  {id:'alcohol', label:'알코올'},
+  {id:'ether', label:'에터'},
+  {id:'aldehyde', label:'알데하이드'},
+  {id:'ketone', label:'케톤'},
+  {id:'ester', label:'에스터'},
+  {id:'acid', label:'카복실산'},
+  {id:'amine', label:'아민'},
+  {id:'phenol', label:'페놀'},
+];
+const catLabel = id => (CATS.find(c=>c.id===id)||{}).label || id;
+
+/* ===================== UI 로직 ===================== */
+const catGrid = document.getElementById('catGrid');
+CATS.forEach(c=>{
+  const wrap=document.createElement('div'); wrap.className='cat-chip';
+  wrap.innerHTML = `<input type="checkbox" id="cat-${c.id}" checked><label for="cat-${c.id}">${c.label} <span>${MOLS.filter(m=>m.cat===c.id).length}</span></label>`;
+  catGrid.appendChild(wrap);
+});
+document.getElementById('allBtn').addEventListener('click', ()=>{
+  const boxes = catGrid.querySelectorAll('input[type=checkbox]');
+  const allChecked = Array.from(boxes).every(b=>b.checked);
+  boxes.forEach(b=>b.checked = !allChecked); updateSelection();
+});
+
+const HYDRO_CATS=new Set(['alkane','alkene','alkyne','cycloalkane','cycloalkene','cycloalkyne','aromatic']);
+function updateSelection(){
+ const cats=selectedCats(),count=MOLS.filter(m=>cats.has(m.cat)).length;
+ document.getElementById('selectionText').textContent=count ? `선택한 ${count}문제가 중복 없이 무작위로 출제됩니다.` : '연습할 범위를 하나 이상 선택하세요.';
+ document.getElementById('startBtn').textContent=count ? `${count}문제 시작하기` : '범위를 선택하세요';
+ document.getElementById('startBtn').disabled=!count;
+ document.getElementById('allBtn').textContent=cats.size===CATS.length ? '전체 해제' : '전체 선택';
+}
+catGrid.addEventListener('change',updateSelection);
+document.getElementById('hydroBtn').addEventListener('click',()=>{CATS.forEach(c=>document.getElementById('cat-'+c.id).checked=HYDRO_CATS.has(c.id));updateSelection();});
+updateSelection();
+function normalize(s){
+  return s
+    .toLowerCase()
+    .trim()
+    .replace(/[‐‑‒–—―]/g,'-')
+    .replace(/[^a-z0-9]/g,''); // 공백, 하이픈, 쉼표 등은 모두 무시하고 비교
+}
+
+let state = { queue:[], pos:0, correct:0, firstCheckDone:false, locked:false };
+
+function shuffle(arr){
+  const a=arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+function selectedCats(){
+  return new Set(CATS.filter(c=>document.getElementById('cat-'+c.id).checked).map(c=>c.id));
+}
+
+document.getElementById('startBtn').addEventListener('click', ()=>{
+  const cats = selectedCats();
+  let pool = MOLS.filter(m=>cats.has(m.cat));
+  if(pool.length===0) return;
+  state.queue = shuffle(pool);
+  state.pos = 0; state.correct = 0;
+  document.getElementById('quizArea').style.display = 'block';
+  document.getElementById('donePanel').classList.remove('show');
+  renderCurrent();
+  document.getElementById('quizArea').scrollIntoView({behavior:'smooth', block:'start'});
+});
+
+document.getElementById('restartBtn').addEventListener('click', ()=>{
+  document.getElementById('donePanel').classList.remove('show');
+  document.getElementById('startBtn').click();
+});
+
+function renderCurrent(){
+  const mol = state.queue[state.pos];
+  const m = newMol();
+  mol.build(m);
+  document.getElementById('structureBox').innerHTML = buildSVG(m);
+
+  const hint = document.getElementById('hintToggle').checked;
+  const badge = document.getElementById('catBadge');
+  if(hint){ badge.style.display='inline-block'; badge.textContent = catLabel(mol.cat); }
+  else{ badge.style.display='none'; }
+
+  document.getElementById('progressText').textContent = `${state.pos+1} / ${state.queue.length}`;
+  document.getElementById('scoreText').textContent = state.correct;
+
+  const input = document.getElementById('answerInput');
+  input.value=''; input.disabled=false;
+  document.getElementById('checkBtn').disabled=false;
+  document.getElementById('revealBtn').disabled=false;
+  const fb = document.getElementById('feedback');
+  fb.className='feedback'; fb.textContent='';
+  state.firstCheckDone=false; state.locked=false;
+  input.focus({preventScroll:true});
+}
+
+function explanationHTML(mol){return `<div class="explanation"><b>명명 포인트</b><br>${mol.explanation}</div>`;}
+function showFeedback(isCorrect, mol){
+  const fb = document.getElementById('feedback');
+  fb.classList.add('show');
+  if(isCorrect){
+    fb.classList.remove('wrong'); fb.classList.add('correct');
+    fb.innerHTML = `✅ 정답입니다!<div class="answers">${mol.ans[0]}</div>${explanationHTML(mol)}`;
+  } else {
+    fb.classList.remove('correct'); fb.classList.add('wrong');
+    fb.innerHTML = `❌ 다시 확인해보세요.`;
+  }
+}
+
+function checkAnswer(){
+  if(state.locked || !state.queue[state.pos]) return;
+  const mol = state.queue[state.pos];
+  const input = document.getElementById('answerInput');
+  const val = normalize(input.value);
+  if(val===''){ return; }
+  const isCorrect = mol.ans.some(a=>normalize(a)===val);
+
+  if(!state.firstCheckDone){
+    state.firstCheckDone = true;
+    if(isCorrect) state.correct++;
+    document.getElementById('scoreText').textContent = state.correct;
+  }
+  showFeedback(isCorrect, mol);
+
+  if(isCorrect){
+    input.disabled=true;
+    document.getElementById('checkBtn').disabled=true;
+    document.getElementById('revealBtn').disabled=true;
+    state.locked=true;
+  }
+}
+
+function revealAnswer(){
+  if(state.locked || !state.queue[state.pos]) return;
+  const mol = state.queue[state.pos];
+  if(!state.firstCheckDone){
+    state.firstCheckDone = true;
+    document.getElementById('scoreText').textContent = state.correct;
+  }
+  const fb = document.getElementById('feedback');
+  fb.classList.add('show'); fb.classList.remove('wrong'); fb.classList.add('correct');
+  const alts = mol.ans.length>1 ? `<div style="font-weight:400;color:var(--muted);margin-top:4px;font-size:0.82rem;">허용되는 다른 표현: ${mol.ans.slice(1).join(', ')}</div>` : '';
+  fb.innerHTML = `💡 정답: <div class="answers">${mol.ans[0]}</div>${alts}${explanationHTML(mol)}`;
+  document.getElementById('answerInput').disabled=true;
+  document.getElementById('checkBtn').disabled=true;
+  document.getElementById('revealBtn').disabled=true;
+  state.locked=true;
+}
+
+function nextQuestion(){
+  if(!state.queue[state.pos]) return;
+  state.pos++;
+  if(state.pos >= state.queue.length){
+    document.getElementById('quizArea').style.display='none';
+    document.getElementById('finalScore').textContent = state.correct;
+    document.getElementById('finalTotal').textContent = state.queue.length;
+    document.getElementById('donePanel').classList.add('show');
+    document.getElementById('donePanel').scrollIntoView({behavior:'smooth', block:'center'});
+  } else {
+    renderCurrent();
+  }
+}
+
+document.getElementById('checkBtn').addEventListener('click', checkAnswer);
+document.getElementById('revealBtn').addEventListener('click', revealAnswer);
+document.getElementById('nextBtn').addEventListener('click', nextQuestion);
+document.getElementById('answerInput').addEventListener('keydown', e=>{
+  if(e.key==='Enter'){
+    e.preventDefault();
+    if(state.locked){ nextQuestion(); } else { checkAnswer(); }
+  }
+});
+document.getElementById('hintToggle').addEventListener('change', ()=>{
+  if(!state.queue[state.pos]) return;
+  const mol = state.queue[state.pos];
+  const hint = document.getElementById('hintToggle').checked;
+  const badge = document.getElementById('catBadge');
+  if(hint){ badge.style.display='inline-block'; badge.textContent = catLabel(mol.cat); }
+  else{ badge.style.display='none'; }
+});
+</script>
+</body>
+</html>
